@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="RoomPrefabSkin" width="136" height="174" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" >
+	<w:Config id="164ccd4a3fc" ></w:Config>
+	<e:Group id="roomItem" x="0" y="0">
+		<e:Image source="room_png" x="0" y="0"/>
+		<e:Image source="bar-user3.1_png" x="0" y="0"/>
+		<e:Label id="roomId" text="10001" x="4" y="93" anchorOffsetX="0" width="127.03" anchorOffsetY="0" height="37.58" textAlign="center" verticalAlign="middle" textColor="0x070707"/>
+		<e:Label id="roomname" text="默认" x="4" y="135" anchorOffsetX="0" width="127.03" anchorOffsetY="0" height="37.58" textAlign="center" verticalAlign="middle" textColor="0x070707"/>
+	</e:Group>
+</e:Skin>

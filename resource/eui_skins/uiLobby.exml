@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="uiLobbySkin" width="750" height="1334" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" >
+	<w:Config id="164c75933b6" ></w:Config>
+	<e:Image source="bot-bg_png" y="0" x="-4"/>
+	<e:Image source="def-user-squ_png" x="312.5" y="296"/>
+	<e:Image source="handcon_png" x="257.5" y="210.5"/>
+	<e:Label id="username" text="玩家名称" x="280.64" y="457.44" textColor="0x000000" anchorOffsetX="0" width="192.73" anchorOffsetY="0" height="72.42" verticalAlign="middle" textAlign="center" size="40"/>
+	<e:Group id="random" x="115" y="900">
+		<e:Image source="dating-btn_png" x="0" y="0"/>
+		<e:Label text="随机匹配" x="141" y="20" anchorOffsetX="0" width="230" anchorOffsetY="0" height="86" verticalAlign="middle" textAlign="center" size="40" touchEnabled="false"/>
+	</e:Group>
+	<e:Group id="createRoom" x="111" y="1006">
+		<e:Image source="dating-btn2_png" x="0" y="0"/>
+		<e:Label text="创建房间" anchorOffsetX="0" x="58" y="41" anchorOffsetY="0" size="40" textColor="0xffffff" touchEnabled="false"/>
+	</e:Group>
+	<e:Group id="joinRoom" x="375.55" y="1003.88">
+		<e:Image source="dating-btn2_png" x="0" y="0"/>
+		<e:Label text="加入房间" anchorOffsetX="0" x="58" y="41" anchorOffsetY="0" size="40" textColor="0xFFFFFF" touchEnabled="false"/>
+	</e:Group>
+	<e:Image id="exit" source="btn-back_png" x="54.07" y="52.61"/>
+</e:Skin>

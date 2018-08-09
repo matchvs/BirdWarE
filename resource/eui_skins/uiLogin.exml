@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="uiLoginSkin" width="750" height="1334" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" >
+	<w:Config id="164c73b64fb" ></w:Config>
+	<e:Image source="bot-bg_png" y="0"/>
+	<e:Image id="start" source="startGame_png" x="113" y="980"/>
+	<e:Image source="xiaojilogo_png" x="147" y="192"/>
+</e:Skin>
