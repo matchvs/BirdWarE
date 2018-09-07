@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="uiCreateRoomSkin" width="750" height="1344" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" >
+	<w:Config id="164cc7609d2" ></w:Config>
+	<e:Image x="12" y="16" anchorOffsetX="0" width="750" anchorOffsetY="0" height="1344" alpha="1" source="home-bg_png"/>
+	<e:Image source="cpm-logo2_png" x="75.5" y="398.5"/>
+	<e:Image id="plus" source="icon-plus_png" x="574" y="648"/>
+	<e:Image id="sub" source="minus_png" x="360" y="667"/>
+	<e:Image source="room-kuang2_png" x="340" y="784"/>
+	<e:TextInput id="roomName" width="228" height="44" x="348" y="792" anchorOffsetX="0" anchorOffsetY="0" prompt="输入房间名字" rotation="0.85"/>
+	<e:Image source="room-kuang2_1_png" x="462" y="646"/>
+	<e:Label id="playerNum" text="1" x="467.33" y="653.33" anchorOffsetX="0" width="45.34" anchorOffsetY="0" height="50.67" textColor="0x020202" textAlign="center" verticalAlign="middle"/>
+	<e:Group id="create" x="275" y="945.5">
+		<e:Image source="dating-btn_png" x="0" y="0" width="200" height="75"/>
+		<e:Label text="创建" x="34" y="6.5" anchorOffsetX="0" width="113.39" anchorOffsetY="0" height="57.27" verticalAlign="middle" textAlign="center" textColor="0x000000" size="32"/>
+	</e:Group>
+	<e:Image id="back" source="close_png" x="623.5" y="515.61"/>
+</e:Skin>

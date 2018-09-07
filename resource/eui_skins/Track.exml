@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="TrackSkin" width="79" height="82" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" >
+	<w:Config id="164e693abe0" ></w:Config>
+	<e:Image source="daodanqiu_png" x="1"/>
+</e:Skin>

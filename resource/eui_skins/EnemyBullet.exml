@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="EnemyBulletSkin" width="76" height="36" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" >
+	<w:Config id="164e69567a9" ></w:Config>
+	<e:Image source="lanfangzidan_png" y="16" scaleX="-1" x="0" anchorOffsetX="78" anchorOffsetY="16"/>
+</e:Skin>

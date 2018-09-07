@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="uiResultSkin" width="750" height="1344" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*" >
+	<w:Config id="164d1ba58a8" ></w:Config>
+	<e:Image source="ver-con-bg_png" x="0" y="0"/>
+	<e:Image source="sr-con-bg3_png" x="14" y="207" width="722" height="786" anchorOffsetY="0"/>
+	<e:Image source="sr-con-light_png" x="91.5" y="55"/>
+	<e:Group id="back" x="244.5" y="1146">
+		<e:Image source="home-btn5_png" x="0" y="0"/>
+		<e:Label text="返回" x="29.5" y="2" anchorOffsetX="0" width="194" anchorOffsetY="0" height="68" size="36" verticalAlign="middle" textAlign="center"/>
+	</e:Group>
+	<e:Image id="win" source="sr-con-logo_png" x="232" y="136"/>
+	<e:Image id="lose" source="sr-con-lose_png" x="232" y="140"/>
+	<e:Label id="playerScore" text="0" x="251.36" y="391" anchorOffsetY="0" height="84.55" anchorOffsetX="0" width="89.15" verticalAlign="middle" textAlign="center" size="60" textColor="0xf9b204"/>
+	<e:Label id="enemyScore" text="0" x="406.82" y="388.88" anchorOffsetY="0" height="84.55" anchorOffsetX="0" width="89.15" verticalAlign="middle" textAlign="center" size="60" textColor="0xf9b204"/>
+	<e:Label text=":" x="325.91" y="386.76" anchorOffsetY="0" height="84.55" anchorOffsetX="0" width="89.15" verticalAlign="middle" textAlign="center" size="60" textColor="0xF9B204"/>
+	<e:Group id="playerLayout" width="200" height="372.73" x="85" y="494" anchorOffsetY="0">
+		<e:layout>
+			<e:VerticalLayout horizontalAlign="center" gap="20"/>
+		</e:layout>
+		<ns1:playerIcon x="73" y="45"/>
+		<ns1:playerIcon x="83" y="55"/>
+	</e:Group>
+	<e:Group id="enemyLayout" width="200" height="372.73" x="486.42" y="497.94" anchorOffsetY="0">
+		<e:layout>
+			<e:VerticalLayout horizontalAlign="center" gap="20"/>
+		</e:layout>
+		<ns1:playerIcon x="62" y="44"/>
+		<ns1:playerIcon x="72" y="54"/>
+	</e:Group>
+</e:Skin>

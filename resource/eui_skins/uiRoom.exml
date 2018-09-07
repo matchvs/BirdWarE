@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="uiRoomSkin" width="750" height="1344" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*" >
+	<w:Config id="164cc9fdb18" ></w:Config>
+	<e:Image source="bot-bg_png" x="0" y="0"/>
+	<e:Image source="ver-user-bg_png" x="0" y="357.5"/>
+	<e:Group id="leave" x="48" y="1052">
+		<e:Image source="home-btn_png" x="0" y="0"/>
+		<e:Label text="离开" x="32" y="12" anchorOffsetX="0" width="198" anchorOffsetY="0" height="82" size="40" verticalAlign="middle" textAlign="center"/>
+	</e:Group>
+	<e:Group id="gamestart" x="406" y="1054">
+		<e:Image source="home-btn_png" x="0" y="0"/>
+		<e:Label text="开始游戏" x="32" y="12" anchorOffsetX="0" width="198" anchorOffsetY="0" height="82" size="40" verticalAlign="middle" textAlign="center"/>
+	</e:Group>
+	<e:Group id="gamestartGray" x="406" y="1054">
+		<e:Image x="0" y="0" source="bar-user2.2_png" anchorOffsetX="0" width="260" anchorOffsetY="0" height="100"/>
+		<e:Label text="开始游戏" x="32" y="12" anchorOffsetX="0" width="198" anchorOffsetY="0" height="82" size="40" verticalAlign="middle" textAlign="center"/>
+	</e:Group>
+	<e:Group x="23.5" y="276">
+		<e:Image source="icon-money_png" x="0" y="0"/>
+		<e:Image source="rome-gold_png" x="64.5" y="8.5"/>
+	</e:Group>
+	<e:Group id="roomUserGroup" width="724" height="572" x="12" y="392" anchorOffsetX="0" anchorOffsetY="0">
+		<e:layout>
+			<e:HorizontalLayout/>
+		</e:layout>
+	</e:Group>
+</e:Skin>

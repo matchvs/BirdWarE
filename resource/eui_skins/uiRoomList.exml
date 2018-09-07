@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="uiRoomListSkin" width="750" height="1334" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" >
+	<w:Config id="164cccdc9bb" ></w:Config>
+	<e:Image source="ver-join-bg_png"/>
+	<e:Image id="back" source="btn-back_png" x="46.18" y="57.5"/>
+	<e:Label text="加入房间" x="181" y="68.5" anchorOffsetX="0" width="388" anchorOffsetY="0" height="84" verticalAlign="middle" textAlign="center" size="40" textColor="0x000000"/>
+	<e:Image width="742" height="210" x="4" y="1002" anchorOffsetX="0" anchorOffsetY="0"/>
+	<e:Image id="search" source="home-btn5_png" x="269" y="1131"/>
+	<e:Label text="搜索" x="278" y="1136" anchorOffsetX="0" width="246" anchorOffsetY="0" height="66" verticalAlign="middle" textAlign="center" size="34" touchEnabled="false"/>
+	<e:Scroller width="604" height="674" x="82" y="200" anchorOffsetY="0" anchorOffsetX="0">
+		<e:Group id="roomGroup" anchorOffsetX="0" width="608" anchorOffsetY="0" height="666">
+			<e:layout>
+				<e:HorizontalLayout/>
+			</e:layout>
+		</e:Group>
+	</e:Scroller>
+	<e:TextInput id="roomIDInput" width="646" height="76" x="52" y="1002" anchorOffsetX="0" anchorOffsetY="0" prompt="输入房间号"/>
+</e:Skin>

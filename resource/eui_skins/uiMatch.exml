@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="uiMatchSkin" width="750" height="1334" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*" >
+	<w:Config id="164c7749448" ></w:Config>
+	<e:Image source="ver-con-bg_png"/>
+	<e:Image source="cpm-logo_png" x="63.5" y="272"/>
+	<e:Group id="back" x="245" y="888">
+		<e:Image source="home-btn5_png" x="0" y="0"/>
+		<e:Label text="取消" x="61" y="0" anchorOffsetX="0" width="138" anchorOffsetY="0" height="78" touchEnabled="false" verticalAlign="middle" textAlign="center" size="40"/>
+	</e:Group>
+	<e:Image source="vs_png" x="333" y="575.33"/>
+	<ns1:playerIcon id="player1" x="100" y="552" visible="false"/>
+	<ns1:playerIcon id="player2" x="164.55" y="534.85" scaleX="1.5" scaleY="1.5"/>
+	<ns1:playerIcon id="player3" x="446" y="544.91" scaleX="1.5" scaleY="1.5"/>
+	<ns1:playerIcon id="player4" x="556" y="552" visible="false"/>
+</e:Skin>
