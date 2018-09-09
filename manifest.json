@@ -14,10 +14,10 @@
 	],
 	"game": [
 		"bin-debug/game/Bullet.js",
-		"bin-debug/game/Player.js",
-		"bin-debug/UIFrame/BaseView.js",
 		"bin-debug/game/GameUser.js",
 		"bin-debug/game/Item.js",
+		"bin-debug/game/Player.js",
+		"bin-debug/UIFrame/BaseView.js",
 		"bin-debug/game/Shield.js",
 		"bin-debug/game/Enemy1.js",
 		"bin-debug/game/Enemy2.js",

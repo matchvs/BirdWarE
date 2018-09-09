@@ -185,7 +185,6 @@ var Player = (function (_super) {
         this.playerdead.alpha = 1;
         this.playerchicken.alpha = 0;
         this.smoke.alpha = 1;
-        //this.dead.play(0);
         this.currentSpeed = -1000;
         if (Math.abs(this.y - this.groundY) < 5) {
             if (this.isDied && !this.beChicken) {

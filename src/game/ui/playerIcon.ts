@@ -35,3 +35,4 @@ class playerIcon extends eui.Component implements  eui.UIComponent {
 		this.userInfo = userInfo;
 	}
 }
+ window["playerIcon"] = playerIcon  

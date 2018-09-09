@@ -16,3 +16,4 @@ class Shield extends Item{
 	}
 	
 }
+window["Shield"] = Shield

@@ -17,3 +17,4 @@ class FriendBullet extends Bullet{
 	}
 	
 }
+window["FriendBullet"] = FriendBullet

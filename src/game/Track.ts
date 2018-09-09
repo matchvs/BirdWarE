@@ -16,3 +16,4 @@ class Track extends Item{
 	}
 	
 }
+window["Track"] = Track

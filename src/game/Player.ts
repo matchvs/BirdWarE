@@ -266,3 +266,4 @@ enum Camp
 	enemy,
 	none
 }
+window["Player"] = Player

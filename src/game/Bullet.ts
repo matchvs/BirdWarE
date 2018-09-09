@@ -125,3 +125,4 @@ class Bullet extends eui.Component implements  eui.UIComponent {
 		return player;
 	}
 }
+window["Bullet"] = Bullet
