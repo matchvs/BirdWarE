@@ -17,3 +17,4 @@ class EnemyBullet extends Bullet{
 	}
 	
 }
+window["EnemyBullet"] = EnemyBullet
