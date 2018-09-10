@@ -18,7 +18,7 @@ const config: ResourceManagerConfig = {
                 outputDir,
                 commands: [
                     new CleanPlugin({ matchers: ["js", "resource"] }),
-                    new CompilePlugin({ libraryType: "debug", defines: { DEBUG: true, RELEASE: false } }),
+                    new CompilePlugin({ libraryType: "release", defines: { DEBUG: false, RELEASE: true } }),
                     new ExmlPlugin('commonjs'), // 非 EUI 项目关闭此设置
                     new WxgamePlugin(),
                     new ManifestPlugin({ output: 'manifest.js' })
@@ -38,6 +38,11 @@ const config: ResourceManagerConfig = {
                         target: "main.min.js"
                     }
                     ]),
+                    new ResSplitPlugin({
+                      matchers:[
+                          {from:"resource/**",to:`../${projectName}_wxgame_remote`}
+                      ]
+                   }),
                     new ManifestPlugin({ output: 'manifest.js' })
                 ]
             }

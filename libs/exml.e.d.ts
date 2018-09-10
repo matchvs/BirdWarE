@@ -34,6 +34,8 @@ declare class Player1Skin extends eui.Skin{
 }
 declare class Player2Skin extends eui.Skin{
 }
+declare class playerIconSkin extends eui.Skin{
+}
 declare module skins{
 	class ProgressBarSkin extends eui.Skin{
 	}
@@ -62,16 +64,6 @@ declare module skins{
 }
 declare class TrackSkin extends eui.Skin{
 }
-declare module skins{
-	class VScrollBarSkin extends eui.Skin{
-	}
-}
-declare module skins{
-	class VSliderSkin extends eui.Skin{
-	}
-}
-declare class playerIconSkin extends eui.Skin{
-}
 declare class uiCreateRoomSkin extends eui.Skin{
 }
 declare class uiExitSkin extends eui.Skin{
@@ -89,4 +81,12 @@ declare class uiResultSkin extends eui.Skin{
 declare class uiRoomSkin extends eui.Skin{
 }
 declare class uiRoomListSkin extends eui.Skin{
+}
+declare module skins{
+	class VScrollBarSkin extends eui.Skin{
+	}
+}
+declare module skins{
+	class VSliderSkin extends eui.Skin{
+	}
 }

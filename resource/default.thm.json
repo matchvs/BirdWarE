@@ -48,6 +48,7 @@
 		"resource/eui_skins/PanelSkin.exml",
 		"resource/eui_skins/Player1.exml",
 		"resource/eui_skins/Player2.exml",
+		"resource/eui_skins/playerIcon.exml",
 		"resource/eui_skins/ProgressBarSkin.exml",
 		"resource/eui_skins/RadioButtonSkin.exml",
 		"resource/eui_skins/RoomPrefab.exml",
@@ -57,9 +58,6 @@
 		"resource/eui_skins/TextInputSkin.exml",
 		"resource/eui_skins/ToggleSwitchSkin.exml",
 		"resource/eui_skins/Track.exml",
-		"resource/eui_skins/VScrollBarSkin.exml",
-		"resource/eui_skins/VSliderSkin.exml",
-		"resource/eui_skins/playerIcon.exml",
 		"resource/eui_skins/uiCreateRoom.exml",
 		"resource/eui_skins/uiExit.exml",
 		"resource/eui_skins/uiGame.exml",
@@ -68,7 +66,9 @@
 		"resource/eui_skins/uiMatch.exml",
 		"resource/eui_skins/uiResult.exml",
 		"resource/eui_skins/uiRoom.exml",
-		"resource/eui_skins/uiRoomList.exml"
+		"resource/eui_skins/uiRoomList.exml",
+		"resource/eui_skins/VScrollBarSkin.exml",
+		"resource/eui_skins/VSliderSkin.exml"
 	],
 	"path": "resource/default.thm.json"
 }

@@ -3,7 +3,7 @@
   "compilerVersion": "5.2.3",
   "template": {},
   "target": {
-    "current": "web"
+    "current": "wxgame"
   },
   "eui": {
     "exmlRoot": [
@@ -43,8 +43,8 @@
       "name": "promise"
     },
     {
-       "name": "matchvs",
-       "path": "../matchvs"
+      "name": "matchvs",
+      "path": "../matchvs"
     }
   ]
 }

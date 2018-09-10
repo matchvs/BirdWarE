@@ -3,3 +3,4 @@ class Player2 extends Player {
 		super();
 	}
 }
+window["Player2"] = Player2

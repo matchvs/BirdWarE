@@ -4,3 +4,4 @@ class Enemy1 extends Player{
 	}
 	
 }
+window["Enemy1"] = Enemy1
