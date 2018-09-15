@@ -32,7 +32,8 @@
 		"Shield": "resource/eui_skins/Shield.exml",
 		"Track": "resource/eui_skins/Track.exml",
 		"FriendBullet": "resource/eui_skins/FriendBullet.exml",
-		"EnemyBullet": "resource/eui_skins/EnemyBullet.exml"
+		"EnemyBullet": "resource/eui_skins/EnemyBullet.exml",
+		"uiTip": "resource/eui_skins/uiTip.exml"
 	},
 	"autoGenerateExmlsList": true,
 	"exmls": [
@@ -67,6 +68,7 @@
 		"resource/eui_skins/uiResult.exml",
 		"resource/eui_skins/uiRoom.exml",
 		"resource/eui_skins/uiRoomList.exml",
+		"resource/eui_skins/uiTip.exml",
 		"resource/eui_skins/VScrollBarSkin.exml",
 		"resource/eui_skins/VSliderSkin.exml"
 	],

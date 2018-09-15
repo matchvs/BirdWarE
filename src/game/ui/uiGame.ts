@@ -243,7 +243,22 @@ class uiGame extends BaseView {
     }
 	
 	private leaveRoomNotify(ev:egret.Event) {
-
+		let leaveRoom = ev.data;
+		let userid = leaveRoom.userId;
+		if(userid != GameData.gameUser.id)
+		{
+			let friends = this.friendIds.filter(function(x){
+				return x == userid;
+			});
+			let tip:uiTip;
+			if(friends.length > 0)
+			{
+				tip = new uiTip("队友离开了游戏");
+			}else{
+				tip = new uiTip("对手离开了游戏");
+			}
+			this.addChild(tip);
+		}
 	}
 
 	private items;
