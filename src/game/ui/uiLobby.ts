@@ -33,7 +33,12 @@ class uiLobby extends BaseView{
 		this.random.addEventListener(egret.TouchEvent.TOUCH_TAP,this.onRandomMatch,this);
 		this.joinRoom.addEventListener(egret.TouchEvent.TOUCH_TAP,this.onJoinRoomMatch,this);
 		this.exit.addEventListener(egret.TouchEvent.TOUCH_TAP,this.exitRoom,this);
+		this.addMsResponseListen();
 	}
+
+	private addMsResponseListen(){
+        mvs.MsResponse.getInstance.addEventListener(mvs.MsEvent.EVENT_ERROR_RSP, this.onErrorRsp,this);
+    }
 
 	private exitRoom()
 	{
@@ -54,5 +59,20 @@ class uiLobby extends BaseView{
 	private onJoinRoomMatch()
 	{
 		ContextManager.Instance.showDialog(UIType.roomList);
+	}
+
+	private onErrorRsp(ev:egret.Event)
+	{
+		let data = ev.data;
+		let errorCode = data.errCode;
+		if(errorCode == 1001)
+		{
+			let tip = new uiTip("网络断开连接");
+			this.addChild(tip);
+			setTimeout(function() {
+				mvs.MsEngine.getInstance.logOut();
+				ContextManager.Instance.backSpecifiedUI(UIType.loginBoard);
+			}, 5000);
+		}
 	}
 }
