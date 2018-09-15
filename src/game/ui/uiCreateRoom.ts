@@ -28,6 +28,7 @@ class uiCreateRoom extends BaseView {
 	{
 		this.num = 2;
 		this.playerNum.text = this.num.toString();
+		this.roomName.text = "";
 	}
 
 	private init()

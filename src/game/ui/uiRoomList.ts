@@ -30,9 +30,10 @@ class uiRoomList extends BaseView {
 	private addToStage()
 	{
 		this.rooms = [];
-		 mvs.MsResponse.getInstance.addEventListener(mvs.MsEvent.EVENT_GETROOMLIST_EX_RSP,this.getRoomListResponse,this);
-		 mvs.MsResponse.getInstance.addEventListener(mvs.MsEvent.EVENT_JOINROOM_RSP,this.joinRoomResponse,this);
-		 mvs.MsResponse.getInstance.addEventListener(mvs.MsEvent.EVENT_GETROOMLIST_RSP,this.getRoomListExResponse,this);
+		this.roomIDInput.text = "";
+		mvs.MsResponse.getInstance.addEventListener(mvs.MsEvent.EVENT_GETROOMLIST_EX_RSP,this.getRoomListResponse,this);
+		mvs.MsResponse.getInstance.addEventListener(mvs.MsEvent.EVENT_JOINROOM_RSP,this.joinRoomResponse,this);
+		mvs.MsResponse.getInstance.addEventListener(mvs.MsEvent.EVENT_GETROOMLIST_RSP,this.getRoomListExResponse,this);
 	}
 
 	private init()
