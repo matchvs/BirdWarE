@@ -10,6 +10,8 @@ class uiMatch extends BaseView {
 
 	public constructor() {
 		super();
+		this.addEventListener(egret.Event.ADDED_TO_STAGE,this.addToStage,this);
+		this.addEventListener(egret.Event.REMOVED_FROM_STAGE,this.removeFromStage,this);
 	}
 
 	protected partAdded(partName:string,instance:any):void
@@ -26,7 +28,16 @@ class uiMatch extends BaseView {
 	private init()
 	{
 		this.back.addEventListener(egret.TouchEvent.TOUCH_TAP,this.onBackClick,this);
+	}
+
+	private addToStage()
+	{
 		this.addMsResponseListen();
+	}
+
+	private removeFromStage()
+	{
+		this.removeMsResponseListen();
 	}
 
 	public onEnter(context:any):void
@@ -61,6 +72,23 @@ class uiMatch extends BaseView {
 
 		 mvs.MsResponse.getInstance.addEventListener(mvs.MsEvent.EVENT_ERROR_RSP, this.onErrorRsp,this);
     }
+
+	private removeMsResponseListen()
+	{
+		  //加入房间
+        mvs.MsResponse.getInstance.removeEventListener(mvs.MsEvent.EVENT_JOINROOM_RSP, this.joinRoomResponse,this);
+        mvs.MsResponse.getInstance.removeEventListener(mvs.MsEvent.EVENT_JOINROOM_NTFY, this.joinRoomNotify,this);
+
+        //关闭房间
+        mvs.MsResponse.getInstance.removeEventListener(mvs.MsEvent.EVENT_JOINOVER_NTFY, this.joinOverNotify,this);
+        mvs.MsResponse.getInstance.removeEventListener(mvs.MsEvent.EVENT_JOINOVER_RSP, this.joinOverResponse,this);
+
+        //离开房间
+        mvs.MsResponse.getInstance.removeEventListener(mvs.MsEvent.EVENT_LEAVEROOM_RSP, this.leaveRoomResponse,this);
+        mvs.MsResponse.getInstance.removeEventListener(mvs.MsEvent.EVENT_LEAVEROOM_NTFY, this.leaveRoomNotify,this);
+
+		mvs.MsResponse.getInstance.removeEventListener(mvs.MsEvent.EVENT_ERROR_RSP, this.onErrorRsp,this);
+	}
 
 	private joinRoomResponse(event:egret.Event) {
 		if(!this.parent)

@@ -12,6 +12,7 @@ class uiRoom extends BaseView {
 	public constructor() {
 		super();
 		this.addEventListener(egret.Event.ADDED_TO_STAGE,this.addToStage,this);
+		this.addEventListener(egret.Event.REMOVED_FROM_STAGE,this.removeFromStage,this);
 	}
 
 	protected partAdded(partName:string,instance:any):void
@@ -26,11 +27,32 @@ class uiRoom extends BaseView {
 		this.init();
 	}
 
+	private addToStage()
+	{
+		this.addMsResponseListen();
+		
+		while(this.roomUserGroup.numChildren > 0)
+		{
+			this.roomUserGroup.removeChildAt(0);
+		}
+		this.players = [];
+		for(let i=0;i<GameData.maxPlayerNum;i++)
+		{
+			var temp:RoomUserInfo = new RoomUserInfo();
+			this.players.push(temp);
+			this.roomUserGroup.addChild(temp);
+		}
+	}
+
+	private removeFromStage()
+	{
+		this.removeMsResponseListen();
+	}
+
 	private init()
 	{
 		this.gamestart.addEventListener(egret.TouchEvent.TOUCH_TAP,this.gamestartClick,this);
 		this.leave.addEventListener(egret.TouchEvent.TOUCH_TAP,this.leaveRoom,this);
-		this.addMsResponseListen();
 	}
 
 	private addMsResponseListen(){
@@ -55,6 +77,28 @@ class uiRoom extends BaseView {
 		 mvs.MsResponse.getInstance.addEventListener(mvs.MsEvent.EVENT_ERROR_RSP, this.onErrorRsp,this);
     }
 
+	private removeMsResponseListen(){
+		 //加入房间
+        mvs.MsResponse.getInstance.removeEventListener(mvs.MsEvent.EVENT_JOINROOM_RSP, this.joinRoomResponse,this);
+        mvs.MsResponse.getInstance.removeEventListener(mvs.MsEvent.EVENT_JOINROOM_NTFY, this.joinRoomNotify,this);
+
+        //离开房间
+        mvs.MsResponse.getInstance.removeEventListener(mvs.MsEvent.EVENT_LEAVEROOM_RSP, this.leaveRoomResponse,this);
+        mvs.MsResponse.getInstance.removeEventListener(mvs.MsEvent.EVENT_LEAVEROOM_NTFY, this.leaveRoomNotify,this);
+
+        //踢人
+        mvs.MsResponse.getInstance.removeEventListener(mvs.MsEvent.EVENT_KICKPLAYER_RSP, this.kickPlayerResponse,this);
+        mvs.MsResponse.getInstance.removeEventListener(mvs.MsEvent.EVENT_KICKPLAYER_NTFY, this.kickPlayerNotify,this);
+
+		mvs.MsResponse.getInstance.removeEventListener(mvs.MsEvent.EVENT_JOINOVER_RSP, this.joinOverResponse,this);
+		mvs.MsResponse.getInstance.removeEventListener(mvs.MsEvent.EVENT_JOINOVER_NTFY, this.joinOverNotify,this);
+
+		//发送消息
+        mvs.MsResponse.getInstance.removeEventListener(mvs.MsEvent.EVENT_SENDEVENT_NTFY, this.sendEventNotify,this);
+
+		 mvs.MsResponse.getInstance.removeEventListener(mvs.MsEvent.EVENT_ERROR_RSP, this.onErrorRsp,this);
+	}
+
 	public onEnter(context:any):void
 	{
 		let createRoom:boolean = context[0];
@@ -71,21 +115,6 @@ class uiRoom extends BaseView {
 			let roominfo = context[2];
 			this.joinRoomInit(roomUserInfoList,roominfo);
 			this.refreshStartBtn();
-		}
-	}
-
-	private addToStage()
-	{
-		while(this.roomUserGroup.numChildren > 0)
-		{
-			this.roomUserGroup.removeChildAt(0);
-		}
-		this.players = [];
-		for(let i=0;i<GameData.maxPlayerNum;i++)
-		{
-			var temp:RoomUserInfo = new RoomUserInfo();
-			this.players.push(temp);
-			this.roomUserGroup.addChild(temp);
 		}
 	}
 	

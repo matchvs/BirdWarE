@@ -8,6 +8,7 @@ class uiLobby extends BaseView{
 	public constructor() {
 		super();
 		this.addEventListener(egret.Event.ADDED_TO_STAGE,this.addToStage,this);
+		this.addEventListener(egret.Event.REMOVED_FROM_STAGE,this.removeFromStage,this);
 	}
 
 	protected partAdded(partName:string,instance:any):void
@@ -25,6 +26,12 @@ class uiLobby extends BaseView{
 	private addToStage()
 	{
 		this.username.text = GameData.gameUser.id.toString();
+		this.addMsResponseListen();
+	}
+
+	private removeFromStage()
+	{
+		this.removeMsResponseListen();
 	}
 
 	private init()
@@ -33,12 +40,16 @@ class uiLobby extends BaseView{
 		this.random.addEventListener(egret.TouchEvent.TOUCH_TAP,this.onRandomMatch,this);
 		this.joinRoom.addEventListener(egret.TouchEvent.TOUCH_TAP,this.onJoinRoomMatch,this);
 		this.exit.addEventListener(egret.TouchEvent.TOUCH_TAP,this.exitRoom,this);
-		this.addMsResponseListen();
 	}
 
 	private addMsResponseListen(){
         mvs.MsResponse.getInstance.addEventListener(mvs.MsEvent.EVENT_ERROR_RSP, this.onErrorRsp,this);
     }
+
+	private removeMsResponseListen()
+	{
+		mvs.MsResponse.getInstance.removeEventListener(mvs.MsEvent.EVENT_ERROR_RSP,this.onErrorRsp,this);
+	}
 
 	private exitRoom()
 	{

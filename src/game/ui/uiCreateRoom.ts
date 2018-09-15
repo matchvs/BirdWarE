@@ -21,7 +21,6 @@ class uiCreateRoom extends BaseView {
 	protected childrenCreated():void
 	{
 		super.childrenCreated();
-		this.init();
 	}
 	
 	private addToStage()
@@ -29,20 +28,19 @@ class uiCreateRoom extends BaseView {
 		this.num = 2;
 		this.playerNum.text = this.num.toString();
 		this.roomName.text = "";
+		this.addListen();
 	}
 
-	private init()
-	{
+	private addListen(){
+
 		this.back.addEventListener(egret.TouchEvent.TOUCH_TAP,this.onBackClick,this);
 		this.plus.addEventListener(egret.TouchEvent.TOUCH_TAP,this.onPlusClick,this);
 		this.sub.addEventListener(egret.TouchEvent.TOUCH_TAP,this.onSubClick,this);
 		this.create.addEventListener(egret.TouchEvent.TOUCH_TAP,this.createRoom,this);
-		this.addMsResponseListen();
-	}
 
-	private addMsResponseListen(){
         mvs.MsResponse.getInstance.addEventListener(mvs.MsEvent.EVENT_CREATEROOM_RSP, this.createRoomResponse,this);
     }
+
 
 	private onBackClick()
 	{
