@@ -15,7 +15,7 @@
 		<e:Image x="0" y="0" source="bar-user2.2_png" anchorOffsetX="0" width="260" anchorOffsetY="0" height="100"/>
 		<e:Label text="开始游戏" x="32" y="12" anchorOffsetX="0" width="198" anchorOffsetY="0" height="82" size="40" verticalAlign="middle" textAlign="center"/>
 	</e:Group>
-	<e:Group x="23.5" y="276">
+	<e:Group x="23.5" y="276" visible="false">
 		<e:Image source="icon-money_png" x="0" y="0"/>
 		<e:Image source="rome-gold_png" x="64.5" y="8.5"/>
 	</e:Group>
