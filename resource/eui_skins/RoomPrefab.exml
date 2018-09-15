@@ -4,7 +4,7 @@
 	<e:Group id="roomItem" x="0" y="0">
 		<e:Image source="room_png" x="0" y="0"/>
 		<e:Image source="bar-user3.1_png" x="0" y="0"/>
-		<e:Label id="roomId" text="10001" x="4" y="93" anchorOffsetX="0" width="127.03" anchorOffsetY="0" height="37.58" textAlign="center" verticalAlign="middle" textColor="0x070707"/>
-		<e:Label id="roomname" text="默认" x="4" y="135" anchorOffsetX="0" width="127.03" anchorOffsetY="0" height="37.58" textAlign="center" verticalAlign="middle" textColor="0x070707"/>
+		<e:Label id="roomId" text="100010000000000" x="4" y="116" anchorOffsetX="0" width="127.03" anchorOffsetY="0" height="14.58" textAlign="center" verticalAlign="middle" textColor="0x070707" size="10"/>
+		<e:Label id="roomname" text="默认" x="4" y="139" anchorOffsetX="0" width="127.03" anchorOffsetY="0" height="26.58" textAlign="center" verticalAlign="middle" textColor="0x070707" size="13" bold="false"/>
 	</e:Group>
 </e:Skin>
