@@ -23,7 +23,9 @@ class uiGame extends BaseView {
 	private gameover = false;
 	private gamestart = false;
 	private enemyHeartNum = 3;
+	private enemyNum = 0;
 	private friendHeartNum = 3;
+	private friendNum = 0;
 
 	public hitByGroup:eui.Group;
 	public hitgroup:eui.Group;
@@ -92,6 +94,7 @@ class uiGame extends BaseView {
 			this.playerIcon2.setData(GameData.playerUserIds[0]);
 			this.enemyIcon2.visible = true;
 			this.enemyIcon2.setData(GameData.playerUserIds[1]);
+			this.enemyNum = this.friendNum = 1;
 		}else{
 			this.playerIcon1.visible = true;
 			this.playerIcon1.setData(GameData.playerUserIds[0]);
@@ -101,6 +104,7 @@ class uiGame extends BaseView {
 			this.enemyIcon1.setData(GameData.playerUserIds[2]);
 			this.enemyIcon2.visible = true;
 			this.enemyIcon2.setData(GameData.playerUserIds[3]);
+			this.enemyNum = this.friendNum = 2;
 		}
 		this.addEventListener(egret.TouchEvent.TOUCH_TAP,this.onTouchEvent,this);	
 
@@ -270,6 +274,7 @@ class uiGame extends BaseView {
 	private leaveRoomNotify(ev:egret.Event) {
 		let leaveRoom = ev.data;
 		let userid = leaveRoom.userId;
+		let self = this;
 		if(userid != GameData.gameUser.id)
 		{
 			if(!this.gameover){
@@ -284,6 +289,56 @@ class uiGame extends BaseView {
 					tip = new uiTip("对手离开了游戏");
 				}
 				this.addChild(tip);
+			}
+		}
+
+		if(!this.gameover)
+		{
+			let friends = this.friendIds.filter(function(x){
+				return x == userid;
+			});
+
+			if(friends.length > 0)
+			{
+				this.friendNum --;
+				if(this.friendNum == 0)
+				{
+					this.gameover = true;
+					this.gamestart = false;
+					var loseCamp:Camp = Camp.friend;
+					this.gameoverAni.play(0);
+					var sound:egret.Sound = RES.getRes("gameover_mp3");
+					sound.play(0,1);
+					setTimeout(function() {
+						var data = {
+							friendIds:self.friendIds,
+							enemyIds:self.enemyIds,
+							friendScore:3-self.enemyHeartNum,
+							enemyScore:3-self.friendHeartNum
+						}
+						ContextManager.Instance.showUI(UIType.gameOver,data)
+					}, 2000);
+				}
+			}else{
+				this.enemyNum --;
+				if(this.enemyNum == 0)
+				{
+					this.gameover = true;
+					this.gamestart = false;
+					var loseCamp:Camp = Camp.enemy;
+					this.gameoverAni.play(0);
+					var sound:egret.Sound = RES.getRes("gameover_mp3");
+					sound.play(0,1);
+					setTimeout(function() {
+						var data = {
+							friendIds:self.friendIds,
+							enemyIds:self.enemyIds,
+							friendScore:3-self.enemyHeartNum,
+							enemyScore:3-self.friendHeartNum
+						}
+						ContextManager.Instance.showUI(UIType.gameOver,data)
+					}, 2000);
+				}
 			}
 		}
 	}
