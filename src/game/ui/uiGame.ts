@@ -13,13 +13,14 @@ class uiGame extends BaseView {
 
 	public hit:egret.tween.TweenGroup;
 	public hitby:egret.tween.TweenGroup;
-	public gameover:egret.tween.TweenGroup;
+	public gameoverAni:egret.tween.TweenGroup;
 	public rope:egret.tween.TweenGroup;
 	public roundLb:egret.tween.TweenGroup;
 	public ready:egret.tween.TweenGroup;
 	public timeoverTween:egret.tween.TweenGroup;
 
 	private players;
+	private gameover = false;
 	private gamestart = false;
 	private enemyHeartNum = 3;
 	private friendHeartNum = 3;
@@ -32,6 +33,9 @@ class uiGame extends BaseView {
 
 	public constructor() {
 		super();
+		this.addEventListener(egret.Event.ADDED_TO_STAGE,this.addMsResponseListen,this);
+		this.addEventListener(egret.Event.REMOVED_FROM_STAGE,this.removeFromStage,this);
+		this.addEventListener(egret.Event.ENTER_FRAME,this.onEnterFrame,this);
 	}
 
 	protected partAdded(partName:string,instance:any):void
@@ -39,23 +43,34 @@ class uiGame extends BaseView {
 		super.partAdded(partName,instance);
 	}
 
-
 	protected childrenCreated():void
 	{
 		super.childrenCreated();
-		//this.init();
+		this.init();
 	}
 
-	public onEnter(context:any):void
+	private addToStage()
 	{
-		this.init();
+		this.addMsResponseListen();
+	}
+
+	private removeFromStage()
+	{
+		this.removeMsResponseListen();
 	}
 
 	private init()
 	{
-		this.addMsResponseListen();
-		this.addEventListener(egret.Event.ENTER_FRAME,this.onEnterFrame,this);
 		this.exit.addEventListener(egret.TouchEvent.TOUCH_TAP,this.onExitClick,this);
+	}
+
+	public onEnter(context:any):void
+	{
+		this.updateinfo();
+	}
+
+	private updateinfo()
+	{
 		this.curRound = 1;
 		this.friendHeartNum = 3;
 		this.enemyHeartNum = 3;
@@ -90,6 +105,7 @@ class uiGame extends BaseView {
 		this.addEventListener(egret.TouchEvent.TOUCH_TAP,this.onTouchEvent,this);	
 
 		this.gamestart = false;
+		this.gameover = false;
 		let self = this;
 		this.roundStart();
 	}
@@ -241,23 +257,34 @@ class uiGame extends BaseView {
         mvs.MsResponse.getInstance.addEventListener(mvs.MsEvent.EVENT_LEAVEROOM_NTFY, this.leaveRoomNotify,this);
 		mvs.MsResponse.getInstance.addEventListener(mvs.MsEvent.EVENT_LEAVEROOM_RSP,this.leaveRoomResponse,this);
     }
+
+	private removeMsResponseListen()
+	{
+		//发送消息
+        mvs.MsResponse.getInstance.removeEventListener(mvs.MsEvent.EVENT_SENDEVENT_NTFY, this.sendEventNotify,this);
+        //离开房间
+        mvs.MsResponse.getInstance.removeEventListener(mvs.MsEvent.EVENT_LEAVEROOM_NTFY, this.leaveRoomNotify,this);
+		mvs.MsResponse.getInstance.removeEventListener(mvs.MsEvent.EVENT_LEAVEROOM_RSP,this.leaveRoomResponse,this);
+	}
 	
 	private leaveRoomNotify(ev:egret.Event) {
 		let leaveRoom = ev.data;
 		let userid = leaveRoom.userId;
 		if(userid != GameData.gameUser.id)
 		{
-			let friends = this.friendIds.filter(function(x){
-				return x == userid;
-			});
-			let tip:uiTip;
-			if(friends.length > 0)
-			{
-				tip = new uiTip("队友离开了游戏");
-			}else{
-				tip = new uiTip("对手离开了游戏");
+			if(!this.gameover){
+				let friends = this.friendIds.filter(function(x){
+					return x == userid;
+				});
+				let tip:uiTip;
+				if(friends.length > 0)
+				{
+					tip = new uiTip("队友离开了游戏");
+				}else{
+					tip = new uiTip("对手离开了游戏");
+				}
+				this.addChild(tip);
 			}
-			this.addChild(tip);
 		}
 	}
 
@@ -445,7 +472,7 @@ class uiGame extends BaseView {
 
 	public gameOver()
 	{
-		this.gameover.play(0);
+		this.gameoverAni.play(0);
 		var sound:egret.Sound = RES.getRes("gameover_mp3");
   		sound.play(0,1);
 		clearInterval(this.countDownInterval);
@@ -549,7 +576,8 @@ class uiGame extends BaseView {
 			{
 				loseCamp = Camp.friend;
 			}
-			this.gameover.play(0);
+			this.gameover = true;
+			this.gameoverAni.play(0);
 			var sound:egret.Sound = RES.getRes("gameover_mp3");
   			sound.play(0,1);
 			setTimeout(function() {
