@@ -18,4 +18,12 @@
 		<e:Label text="加入房间" anchorOffsetX="0" x="58" y="41" anchorOffsetY="0" size="40" textColor="0xFFFFFF" touchEnabled="false"/>
 	</e:Group>
 	<e:Image id="exit" source="btn-back_png" x="54.07" y="52.61"/>
+	<e:Group id="rank" x="584" y="52.61">
+		<e:Image source="rank-logo_png" x="2.05" y="0"/>
+		<e:Label text="排行榜" x="0" y="63.39" anchorOffsetX="0" width="113" anchorOffsetY="0" height="33" textAlign="center" verticalAlign="middle" size="28" textColor="0x000000"/>
+	</e:Group>
+	<e:Group id="inviteFriends" x="275.55" y="1185">
+		<e:Image source="dating-btn3_png" x="0" y="0.33"/>
+		<e:Label text="邀请好友" x="6.45" y="0" anchorOffsetX="0" width="189.15" anchorOffsetY="0" height="57.27" verticalAlign="middle" textAlign="center" textColor="0x000000"/>
+	</e:Group>
 </e:Skin>

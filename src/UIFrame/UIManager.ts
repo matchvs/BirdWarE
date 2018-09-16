@@ -40,6 +40,8 @@ class UIManager {
 				return new uiLogin();
 			case UIType.matchBoard:	
 				return new uiMatch();
+			case UIType.rankBoard:
+				return new uiRank();
 			case UIType.roomList:
 				return new uiRoomList();
 			case UIType.roomView:

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="RankItemSkin" width="722" height="102" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" >
+	<w:Config id="165e2d9c14e" ></w:Config>
+	<e:Image source="ver-rank-bg2_png"/>
+	<e:Group x="113" y="-2">
+		<e:Image source="def-use_png" x="13" y="14" width="74" height="74"/>
+		<e:Image source="rank-num2_png" x="0" y="0"/>
+	</e:Group>
+	<e:Image source="rank-num_png" x="26" y="25"/>
+	<e:Label id="rank_cnt" text="4" x="26" y="25" anchorOffsetX="0" width="49" anchorOffsetY="0" height="52" verticalAlign="middle" textAlign="center" size="36" stroke="1" strokeColor="0x000000"/>
+	<e:Label id="rank_name" text="昵称" x="254" y="24" anchorOffsetX="0" width="168" anchorOffsetY="0" height="55" verticalAlign="middle" size="40" stroke="1"/>
+	<e:Label id="rank_score" text="6666" x="522" y="24" anchorOffsetX="0" width="168" anchorOffsetY="0" height="55" verticalAlign="middle" size="40" strokeColor="0x3409f9" background="false" backgroundColor="0xff0000" textAlign="left" stroke="1"/>
+</e:Skin>

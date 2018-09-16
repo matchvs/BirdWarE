@@ -4,6 +4,8 @@ class uiLobby extends BaseView{
 	public createRoom:eui.Group;
 	public joinRoom:eui.Group;
 	public exit:eui.Image;
+	public rank:eui.Group;
+	public inviteFriends:eui.Group;
 
 	public constructor() {
 		super();
@@ -40,6 +42,8 @@ class uiLobby extends BaseView{
 		this.random.addEventListener(egret.TouchEvent.TOUCH_TAP,this.onRandomMatch,this);
 		this.joinRoom.addEventListener(egret.TouchEvent.TOUCH_TAP,this.onJoinRoomMatch,this);
 		this.exit.addEventListener(egret.TouchEvent.TOUCH_TAP,this.exitRoom,this);
+		this.rank.addEventListener(egret.TouchEvent.TOUCH_TAP,this.onRankClick,this);
+		this.inviteFriends.addEventListener(egret.TouchEvent.TOUCH_TAP,this.onInviteFriends,this);
 	}
 
 	private addMsResponseListen(){
@@ -70,6 +74,16 @@ class uiLobby extends BaseView{
 	private onJoinRoomMatch()
 	{
 		ContextManager.Instance.showDialog(UIType.roomList);
+	}
+
+	private onRankClick()
+	{
+		ContextManager.Instance.showUI(UIType.rankBoard);
+	}
+
+	private onInviteFriends()
+	{
+
 	}
 
 	private onErrorRsp(ev:egret.Event)
