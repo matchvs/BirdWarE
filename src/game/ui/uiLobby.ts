@@ -83,7 +83,11 @@ class uiLobby extends BaseView{
 
 	private onInviteFriends()
 	{
-
+		window.platform.shareAppMessage().then((res)=>{
+  			console.log('分享成功回调', res);
+		},(err)=>{
+		   console.log('分享失败回调', err);
+		});
 	}
 
 	private onErrorRsp(ev:egret.Event)
