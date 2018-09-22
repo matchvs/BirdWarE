@@ -33,7 +33,9 @@
 		"Track": "resource/eui_skins/Track.exml",
 		"FriendBullet": "resource/eui_skins/FriendBullet.exml",
 		"EnemyBullet": "resource/eui_skins/EnemyBullet.exml",
-		"uiTip": "resource/eui_skins/uiTip.exml"
+		"uiTip": "resource/eui_skins/uiTip.exml",
+		"uiRank": "resource/eui_skins/uiRank.exml",
+		"RankItem": "resource/eui_skins/RankItem.exml"
 	},
 	"autoGenerateExmlsList": true,
 	"exmls": [
@@ -52,6 +54,7 @@
 		"resource/eui_skins/playerIcon.exml",
 		"resource/eui_skins/ProgressBarSkin.exml",
 		"resource/eui_skins/RadioButtonSkin.exml",
+		"resource/eui_skins/RankItem.exml",
 		"resource/eui_skins/RoomPrefab.exml",
 		"resource/eui_skins/RoomUserInfo.exml",
 		"resource/eui_skins/ScrollerSkin.exml",
@@ -65,6 +68,7 @@
 		"resource/eui_skins/uiLobby.exml",
 		"resource/eui_skins/uiLogin.exml",
 		"resource/eui_skins/uiMatch.exml",
+		"resource/eui_skins/uiRank.exml",
 		"resource/eui_skins/uiResult.exml",
 		"resource/eui_skins/uiRoom.exml",
 		"resource/eui_skins/uiRoomList.exml",

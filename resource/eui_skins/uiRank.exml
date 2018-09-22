@@ -6,36 +6,26 @@
 	<e:Image id="exit" source="btn-back_png" x="24" y="76"/>
 	<e:Image source="rank-bg2_png" x="40" y="222"/>
 	<e:Label text="全国排行榜" x="180" y="58" anchorOffsetX="0" width="368" anchorOffsetY="0" height="90" verticalAlign="middle" textAlign="center" size="60"/>
-	<e:Group x="289.67" y="254">
+	<e:Group id="first" x="289.67" y="254">
 		<e:Image source="def-use_png" x="37" y="28.03" width="94" height="94"/>
 		<e:Image source="rank-user1_png" x="0" y="0"/>
 		<e:Label id="firstName" text="第一个厉害的人" x="12.16" y="191.64" size="24" anchorOffsetX="0" width="133.67" anchorOffsetY="0" height="25.33" verticalAlign="middle" textAlign="center"/>
 		<e:Label id="firstScore" text="99999999999" x="16.67" y="166.31" size="24" anchorOffsetX="0" width="133.67" anchorOffsetY="0" height="25.33" verticalAlign="middle" textAlign="center" textColor="0xffae0f"/>
 	</e:Group>
-	<e:Group x="79.69" y="252">
+	<e:Group id="second" x="79.69" y="252">
 		<e:Image source="def-use_png" x="37" y="28.03" width="94" height="94"/>
 		<e:Image x="23.99" y="17.34" source="rank-user3_png"/>
 		<e:Label id="secondName" text="第二个厉害的人" x="12.16" y="191.64" size="24" anchorOffsetX="0" width="133.67" anchorOffsetY="0" height="25.33" verticalAlign="middle" textAlign="center"/>
 		<e:Label id="secondScore" text="99999999999" x="16.67" y="166.31" size="24" anchorOffsetX="0" width="133.67" anchorOffsetY="0" height="25.33" verticalAlign="middle" textAlign="center" textColor="0xed4624"/>
 	</e:Group>
-	<e:Group x="517.68" y="252.69">
+	<e:Group id="third" x="517.68" y="252.69">
 		<e:Image source="def-use_png" x="37" y="28.03" width="94" height="94"/>
 		<e:Image x="20" y="9.34" source="rank-user2_png"/>
 		<e:Label id="thirdName" text="第三个厉害的人" x="12.16" y="191.64" size="24" anchorOffsetX="0" width="133.67" anchorOffsetY="0" height="25.33" verticalAlign="middle" textAlign="center"/>
 		<e:Label id="thirdScore" text="99999999999" x="16.67" y="166.31" size="24" anchorOffsetX="0" width="133.67" anchorOffsetY="0" height="25.33" verticalAlign="middle" textAlign="center" textColor="0x15b3f4"/>
 	</e:Group>
 	<e:Scroller width="751.52" height="745.45" x="3" y="524" anchorOffsetX="0" anchorOffsetY="0">
-		<e:Group anchorOffsetX="0" width="745.45" anchorOffsetY="0" height="754.55">
-			<ns1:RankItem x="18" y="12"/>
-			<ns1:RankItem x="28" y="22"/>
-			<ns1:RankItem x="38" y="32"/>
-			<ns1:RankItem x="48" y="42"/>
-			<ns1:RankItem x="58" y="52"/>
-			<ns1:RankItem x="68" y="62"/>
-			<ns1:RankItem x="78" y="72"/>
-			<ns1:RankItem x="88" y="82"/>
-			<ns1:RankItem x="98" y="92"/>
-			<ns1:RankItem x="108" y="102"/>
+		<e:Group id="ranklist" anchorOffsetX="0" width="745.45" anchorOffsetY="0" height="754.55">
 			<e:layout>
 				<e:VerticalLayout horizontalAlign="center" paddingTop="-1" gap="20"/>
 			</e:layout>
