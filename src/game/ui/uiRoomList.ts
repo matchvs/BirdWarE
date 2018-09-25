@@ -143,10 +143,10 @@ class uiRoomList extends BaseView {
 		}else{
 			for(let i=0;i<this.roomGroup.numChildren;i++)
 			{
-				let room = <RoomPrefab>this.roomGroup[i]
-				if(room.roomId.text == this.roomIDInput.text)
+				let room = <RoomPrefab>this.roomGroup.getChildAt(i);
+				if(room.roomId.text != this.roomIDInput.text)
 				{
-					this.roomGroup.removeChild(this.roomGroup[i]);
+					this.roomGroup.removeChild(room);
 				}
 			}
 		}
