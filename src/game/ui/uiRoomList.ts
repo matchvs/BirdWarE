@@ -28,6 +28,7 @@ class uiRoomList extends BaseView {
 		this.init();
 	}
 	
+	private refreshInterval;
 	private addToStage()
 	{
 		this.rooms = [];
@@ -37,6 +38,13 @@ class uiRoomList extends BaseView {
 		mvs.MsResponse.getInstance.addEventListener(mvs.MsEvent.EVENT_GETROOMLIST_RSP,this.getRoomListExResponse,this);
 
 	    mvs.MsResponse.getInstance.addEventListener(mvs.MsEvent.EVENT_ERROR_RSP, this.onErrorRsp,this);
+		let self = this;
+		this.refreshInterval = setInterval(function() {
+			if(self.roomIDInput.text == "")
+			{
+				self.getRoomList();
+			}
+		}, 5000);
 	}
 
 	private removeFromStage()
@@ -46,6 +54,7 @@ class uiRoomList extends BaseView {
 		mvs.MsResponse.getInstance.removeEventListener(mvs.MsEvent.EVENT_GETROOMLIST_RSP,this.getRoomListExResponse,this);
 
 	    mvs.MsResponse.getInstance.removeEventListener(mvs.MsEvent.EVENT_ERROR_RSP, this.onErrorRsp,this);
+		clearInterval(this.refreshInterval);
 	}
 
 	private init()

@@ -173,13 +173,13 @@ class uiGame extends BaseView {
 						if(j<1)
 						{
 							playerScript.x = -15;
-							playerScript.y = 1150;
+							playerScript.y = 1200;
 						}else{
 							playerScript.x = 165;
 							playerScript.y = 1200;
 						}
 					}else{
-						if(i<campFlg+1)
+						if(j<campFlg+1)
 						{
 							playerScript.x = 380;
 							playerScript.y = 1200;
@@ -203,7 +203,7 @@ class uiGame extends BaseView {
 					{
 						player = new Player1();
 						player.x = -15;
-						player.y = 1150;
+						player.y = 1200;
 					}else{
 						player = new Player2();
 						player.x = 165;
