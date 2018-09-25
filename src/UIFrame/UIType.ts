@@ -7,6 +7,8 @@ enum UIType {
     matchBoard,
     //游戏界面
     gameBoard,
+    //排行榜
+    rankBoard,
     //房间列表
     roomList,
     //退出界面

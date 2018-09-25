@@ -3,6 +3,7 @@ class uiLogin extends BaseView {
 	public constructor() {
 		super();
 		this.addEventListener(egret.Event.ADDED_TO_STAGE,this.addToStage,this);
+		this.removeEventListener(egret.Event.REMOVED_FROM_STAGE,this.RemoveFromStage,this);
 	}
 
 	protected partAdded(partName:string,instance:any):void
@@ -22,6 +23,11 @@ class uiLogin extends BaseView {
 		this.addMsResponseListen();
 	}
 
+	private RemoveFromStage()
+	{
+		this.removeMsResponseListen();
+	}
+
 	private init()
 	{
 		this.start.addEventListener(egret.TouchEvent.TOUCH_TAP,this.onStartClick,this);
@@ -31,6 +37,12 @@ class uiLogin extends BaseView {
 	{
 		mvs.MsResponse.getInstance.addEventListener(mvs.MsEvent.EVENT_REGISTERUSER_RSP,this.registResponse,this);
 		mvs.MsResponse.getInstance.addEventListener(mvs.MsEvent.EVENT_LOGIN_RSP,this.loginResponse,this);
+	}
+
+	private removeMsResponseListen()
+	{
+		mvs.MsResponse.getInstance.removeEventListener(mvs.MsEvent.EVENT_REGISTERUSER_RSP,this.registResponse,this);
+		mvs.MsResponse.getInstance.removeEventListener(mvs.MsEvent.EVENT_LOGIN_RSP,this.loginResponse,this);
 	}
 
 	private loginResponse(ev:egret.Event)

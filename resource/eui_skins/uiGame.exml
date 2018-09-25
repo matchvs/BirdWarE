@@ -471,7 +471,7 @@
 				</tween:Set>
 			</tween:TweenItem>
 		</tween:TweenGroup>
-		<tween:TweenGroup id="gameover">
+		<tween:TweenGroup id="gameoverAni">
 			<tween:TweenItem target="{image18}">
 				<tween:Set>
 					<tween:props>

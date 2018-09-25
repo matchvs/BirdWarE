@@ -17,6 +17,7 @@ class uiResult extends BaseView {
 	{
 		super.partAdded(partName,instance);
 		this.addEventListener(egret.Event.ADDED_TO_STAGE,this.onAddToStage,this);
+		this.addEventListener(egret.Event.REMOVED_FROM_STAGE,this.onRemoveFromStage,this);
 	}
 
 
@@ -35,6 +36,15 @@ class uiResult extends BaseView {
 
 		this.playerScore.text = friendScore + "";
 		this.enemyScore.text = enemyScore + "";
+
+		let platform: any = window.platform;
+		//主域向子域发送自定义消息
+		platform.openDataContext.postMessage({
+			isDisplay: true,
+			text: 'hello',
+			year: (new Date()).getFullYear(),
+			command: "setUserCloudStorage"
+		});
 
 		if(friendScore > enemyScore)
 		{
@@ -79,6 +89,13 @@ class uiResult extends BaseView {
 		  //离开房间
         mvs.MsResponse.getInstance.addEventListener(mvs.MsEvent.EVENT_LEAVEROOM_NTFY, this.leaveRoomNotify,this);
 		mvs.MsResponse.getInstance.addEventListener(mvs.MsEvent.EVENT_LEAVEROOM_RSP,this.leaveRoomResponse,this);
+	}
+
+	private onRemoveFromStage()
+	{
+		//离开房间
+        mvs.MsResponse.getInstance.removeEventListener(mvs.MsEvent.EVENT_LEAVEROOM_NTFY, this.leaveRoomNotify,this);
+		mvs.MsResponse.getInstance.removeEventListener(mvs.MsEvent.EVENT_LEAVEROOM_RSP,this.leaveRoomResponse,this);
 	}
 
 	private onBackClick()
