@@ -46,7 +46,7 @@ class uiResult extends BaseView {
 		// 	command: "setUserCloudStorage"
 		// });
 
-		if(friendScore > enemyScore)
+		if(friendScore >= enemyScore)
 		{
 			this.win.visible = true;
 			this.lose.visible = false;
