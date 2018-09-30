@@ -108,8 +108,8 @@ module mvs {
 				console.info("[joinRoomResponse] status：", status);
 				let users:Array<MsRoomUserInfo> = [];
 				roomUserInfoList.forEach(function(element){
-					let usr:MsRoomUserInfo = new MsRoomUserInfo(element.userId, element.userProfile);
-					users.push(usr);
+					// let usr:MsRoomUserInfo = new MsRoomUserInfo(element.userId, element.userProfile);
+					users.push(element);
 				});
 				this.dispatchEvent(new egret.Event(MsEvent.EVENT_JOINROOM_RSP, false, false, {status:status, userList:users, roomInfo:roomInfo}));
 				return ;

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <e:Skin class="Player2Skin" width="180" height="177" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:tween="egret.tween.*" >
 		<w:Declarations>
-		<tween:TweenGroup id="player1fly">
+		<tween:TweenGroup id="fly">
 			<tween:TweenItem target="{image}">
 				<tween:Set/>
 				<tween:Wait duration="150"/>
