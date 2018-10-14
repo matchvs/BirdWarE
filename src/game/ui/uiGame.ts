@@ -19,7 +19,7 @@ class uiGame extends BaseView {
 	public ready:egret.tween.TweenGroup;
 	public timeoverTween:egret.tween.TweenGroup;
 
-	private players;
+	private players = [];
 	private gameover = false;
 	private gamestart = false;
 	private enemyHeartNum = 3;
@@ -58,6 +58,11 @@ class uiGame extends BaseView {
 
 	private removeFromStage()
 	{
+		for(let i=0;i<this.players.length;i++)
+		{
+			this.removeChild(this.players[i]);
+		}
+		this.players = [];
 		this.removeMsResponseListen();
 	}
 
@@ -120,43 +125,37 @@ class uiGame extends BaseView {
 	{
 		this.friendIds = [];
 		this.enemyIds = [];
+		GameData.playerUserIds.sort(function(a,b){return a-b;});
+		let index = GameData.playerUserIds.indexOf(GameData.gameUser.id);
 		//分组
 		for(let i=0;i<GameData.playerUserIds.length;i++)
 		{
 			if(i<GameData.playerUserIds.length/2)
 			{
-				this.friendIds.push(GameData.playerUserIds[i]);
+				if(index < GameData.playerUserIds.length/2)
+					this.friendIds.push(GameData.playerUserIds[i]);
+				else
+					this.enemyIds.push(GameData.playerUserIds[i]);
 			}else{
-				this.enemyIds.push(GameData.playerUserIds[i]);
+				if(index >= GameData.playerUserIds.length/2)
+					this.friendIds.push(GameData.playerUserIds[i]);
+				else
+					this.enemyIds.push(GameData.playerUserIds[i]);
 			}
 		}
 		var team = [GameData.gameUser.id];
-		if(this.friendIds.indexOf(GameData.gameUser.id) != -1)
+		for(let i=0;i<this.friendIds.length;i++)
 		{
-			for(let i=0;i<this.friendIds.length;i++)
-			{
-				if(this.friendIds[i] != GameData.gameUser.id)
-				{
-					team.push(this.friendIds[i]);
-				}
-			}
-			for(let i=0;i<this.enemyIds.length;i++)
-			{
-				team.push(this.enemyIds[i]);
-			}
-		}else{
-			for(let i=0;i<this.enemyIds.length;i++)
-			{
-				if(this.enemyIds[i] != GameData.gameUser.id)
-				{
-					team.push(this.enemyIds[i]);
-				}
-			}
-			for(let i=0;i<this.friendIds.length;i++)
+			if(this.friendIds[i] != GameData.gameUser.id)
 			{
 				team.push(this.friendIds[i]);
 			}
 		}
+		for(let i=0;i<this.enemyIds.length;i++)
+		{
+			team.push(this.enemyIds[i]);
+		}
+		
 		GameData.playerUserIds = team;
 		var playerScript = null;
 		if(this.players && this.players.length > 0)
@@ -181,10 +180,10 @@ class uiGame extends BaseView {
 					}else{
 						if(j<campFlg+1)
 						{
-							playerScript.x = 380;
+							playerScript.x = 550;
 							playerScript.y = 1200;
 						}else{
-							playerScript.x = 550;
+							playerScript.x = 380;
 							playerScript.y = 1200;
 						}
 					}
@@ -260,6 +259,8 @@ class uiGame extends BaseView {
         //离开房间
         mvs.MsResponse.getInstance.addEventListener(mvs.MsEvent.EVENT_LEAVEROOM_NTFY, this.leaveRoomNotify,this);
 		mvs.MsResponse.getInstance.addEventListener(mvs.MsEvent.EVENT_LEAVEROOM_RSP,this.leaveRoomResponse,this);
+
+		 mvs.MsResponse.getInstance.addEventListener(mvs.MsEvent.EVENT_ERROR_RSP, this.onErrorRsp,this);
     }
 
 	private removeMsResponseListen()
@@ -269,12 +270,34 @@ class uiGame extends BaseView {
         //离开房间
         mvs.MsResponse.getInstance.removeEventListener(mvs.MsEvent.EVENT_LEAVEROOM_NTFY, this.leaveRoomNotify,this);
 		mvs.MsResponse.getInstance.removeEventListener(mvs.MsEvent.EVENT_LEAVEROOM_RSP,this.leaveRoomResponse,this);
+
+		mvs.MsResponse.getInstance.removeEventListener(mvs.MsEvent.EVENT_ERROR_RSP,this.onErrorRsp,this);
 	}
 	
 	private leaveRoomNotify(ev:egret.Event) {
 		let leaveRoom = ev.data;
 		let userid = leaveRoom.userId;
 		let self = this;
+
+		if(GameData.maxPlayerNum > 2)
+		{
+			let cpProto = leaveRoom.cpProto;
+			var info = JSON.parse(cpProto);
+			let roomOwner = info.roomOwner;
+			if(roomOwner)
+			{
+				let newRoomOwner = info.newRoomOwner;
+				if(GameData.gameUser.id == newRoomOwner)
+				{
+					GameData.isRoomOwner = true;
+					self.scheuleFire();
+					self.scheduleSpawItem();
+					self.countDown();	
+					console.log("我称为房主了")
+				}
+			}
+		}
+
 		if(userid != GameData.gameUser.id)
 		{
 			if(!this.gameover){
@@ -465,6 +488,7 @@ class uiGame extends BaseView {
 	private leaveRoomResponse()
 	{
 		ContextManager.Instance.backSpecifiedUI(UIType.lobbyBoard);
+		GameData.isRoomOwner = false;
 	}
 
 	private onExitClick()
@@ -888,6 +912,21 @@ class uiGame extends BaseView {
 				}	
 				return;
 			}
+		}
+	}
+
+	private onErrorRsp(ev:egret.Event)
+	{
+		let data = ev.data;
+		let errorCode = data.errCode;
+		if(errorCode == 1001)
+		{
+			let tip = new uiTip("网络断开连接");
+			this.addChild(tip);
+			setTimeout(function() {
+				mvs.MsEngine.getInstance.logOut();
+				ContextManager.Instance.backSpecifiedUI(UIType.loginBoard);
+			}, 5000);
 		}
 	}
 }

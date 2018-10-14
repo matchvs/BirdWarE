@@ -164,6 +164,7 @@ class uiMatch extends BaseView {
 	
 	private leaveRoomResponse(ev:egret.Event) {
 		ContextManager.Instance.uiBack();
+		GameData.isRoomOwner = false;
 	}
 
 	private leaveRoomNotify(ev:egret.Event) {
