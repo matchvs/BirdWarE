@@ -135,8 +135,9 @@ class uiResult extends BaseView {
 
 	private onBackClick()
 	{
+		
 		mvs.MsEngine.getInstance.leaveRoom("");
-		ContextManager.Instance.backSpecifiedUI(UIType.lobbyBoard);
+		// ContextManager.Instance.backSpecifiedUI(UIType.lobbyBoard);
 	}
 
 	private leaveRoomResponse()
