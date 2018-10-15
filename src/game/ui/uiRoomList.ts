@@ -19,7 +19,7 @@ class uiRoomList extends BaseView {
 
 	public onEnter(context:any):void
 	{
-		this.getRoomList();
+		this.getRoomList("");
 	}
 
 	protected childrenCreated():void
@@ -42,7 +42,7 @@ class uiRoomList extends BaseView {
 		this.refreshInterval = setInterval(function() {
 			if(self.roomIDInput.text == "")
 			{
-				self.getRoomList();
+				self.getRoomList("");
 			}
 		}, 5000);
 	}
@@ -103,6 +103,18 @@ class uiRoomList extends BaseView {
 
 			this.rooms.push(room);
 		}
+
+		if(this.searchKeyWord != "")
+		{
+			for(let i=0;i<this.roomGroup.numChildren;i++)
+				{
+					let room = <RoomPrefab>this.roomGroup.getChildAt(i);
+					if(room.roomId.text != this.roomIDInput.text)
+					{
+						this.roomGroup.removeChild(room);
+					}
+				}
+		}
 	}
 
 	private joinRoomResponse(ev:egret.Event)
@@ -122,7 +134,7 @@ class uiRoomList extends BaseView {
 		ContextManager.Instance.showUI(UIType.roomView,[false,roomuserInfoList,roomInfo]);
 	}
 
-	private getRoomList()
+	private getRoomList(searchKeyword)
 	{
 		 var filter = {
             maxPlayer: 0,
@@ -137,6 +149,7 @@ class uiRoomList extends BaseView {
             pageSize: 20
         }
         mvs.MsEngine.getInstance.getRoomListEx(filter);
+		this.searchKeyWord = searchKeyword;
 	}
 
 	private onBackClick()
@@ -144,21 +157,10 @@ class uiRoomList extends BaseView {
 		ContextManager.Instance.dialogBack();
 	}
 
+	private searchKeyWord = "";
 	private onSearchClick()
 	{
-		if(this.roomIDInput.text == "")
-		{
-			this.getRoomList();
-		}else{
-			for(let i=0;i<this.roomGroup.numChildren;i++)
-			{
-				let room = <RoomPrefab>this.roomGroup.getChildAt(i);
-				if(room.roomId.text != this.roomIDInput.text)
-				{
-					this.roomGroup.removeChild(room);
-				}
-			}
-		}
+		this.getRoomList(this.roomIDInput.text);
 	}
 
 	private onErrorRsp(ev:egret.Event)

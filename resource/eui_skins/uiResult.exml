@@ -20,6 +20,20 @@
 		<ns1:playerIcon x="73" y="45"/>
 		<ns1:playerIcon x="83" y="55"/>
 	</e:Group>
+	<e:Group id="playerNameLayout" width="104" height="372.73" x="241" y="496" anchorOffsetY="0" anchorOffsetX="0">
+		<e:layout>
+			<e:BasicLayout/>
+		</e:layout>
+		<e:Label text="3235065" x="5.94" y="32" textColor="0x000000" anchorOffsetX="0" width="120" anchorOffsetY="0" height="40"/>
+		<e:Label text="320525" x="0" y="154.37" textColor="0x000000" anchorOffsetX="0" width="120" anchorOffsetY="0" height="40"/>
+	</e:Group>
+	<e:Group id="enemytNameLayout" width="104" height="372.73" x="422" y="497" anchorOffsetY="0">
+		<e:layout>
+		<e:BasicLayout/>
+		</e:layout>
+		<e:Label text="123" x="-17" y="34.94" scaleX="1" scaleY="1" textColor="0x000000" textAlign="right" anchorOffsetX="0" width="120"/>
+		<e:Label text="123" x="-17" y="157.31" scaleX="1" scaleY="1" textColor="0x000000" anchorOffsetX="0" width="120" textAlign="right"/>
+	</e:Group>
 	<e:Group id="enemyLayout" width="200" height="372.73" x="486.42" y="497.94" anchorOffsetY="0">
 		<e:layout>
 			<e:VerticalLayout horizontalAlign="center" gap="20"/>

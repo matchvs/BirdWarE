@@ -53,8 +53,8 @@ class uiLobby extends BaseView{
 		// this.btnClose.icon = "resource/btn-back.png";
 		this.btnClose.addEventListener(egret.TouchEvent.TOUCH_TAP,this.closeRank,this);
 
-		// let platform: any = window.platform;
-		// // 加载资源
+		let platform: any = window.platform;
+		// 加载资源
 		//  platform.openDataContext.postMessage({
         //     command:'loadRes'
         // });

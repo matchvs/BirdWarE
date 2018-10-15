@@ -3,6 +3,8 @@ class uiResult extends BaseView {
 	public enemyScore:eui.Label;
 	public playerLayout:eui.Group;
 	public enemyLayout:eui.Group;
+	public playerNameLayout:eui.Group;
+	public enemytNameLayout:eui.Group;
 	public win:eui.Image;
 	public lose:eui.Image;
 
@@ -46,7 +48,7 @@ class uiResult extends BaseView {
 		// 	command: "setUserCloudStorage"
 		// });
 
-		if(friendScore > enemyScore)
+		if(friendScore >= enemyScore)
 		{
 			this.win.visible = true;
 			this.lose.visible = false;
@@ -68,6 +70,15 @@ class uiResult extends BaseView {
 			this.playerLayout.getChildAt(i).visible = true;
 			(<playerIcon>this.playerLayout.getChildAt(i)).setData("");
 		}
+		for(let i=0;i<this.playerNameLayout.numChildren;i++)
+		{
+			this.playerNameLayout.getChildAt(i).visible = false;
+		}
+		for(let i=0;i<friendIds.length;i++)
+		{
+			this.playerNameLayout.getChildAt(i).visible = true;
+			(<eui.Label>this.playerNameLayout.getChildAt(i)).text = friendIds[i];
+		}
 		for(let i=0;i<this.enemyLayout.numChildren;i++)
 		{
 			this.enemyLayout.getChildAt(i).visible =false;
@@ -76,6 +87,15 @@ class uiResult extends BaseView {
 		{
 			this.enemyLayout.getChildAt(i).visible = true;
 			(<playerIcon>this.enemyLayout.getChildAt(i)).setData("");
+		}
+		for(let i=0;i<this.enemytNameLayout.numChildren;i++)
+		{
+			this.enemytNameLayout.getChildAt(i).visible = false;
+		}
+		for(let i=0;i<enemyIds.length;i++)
+		{
+			this.enemytNameLayout.getChildAt(i).visible = true;
+			(<eui.Label>this.enemytNameLayout.getChildAt(i)).text = enemyIds[i];
 		}
 	}
 
@@ -106,6 +126,7 @@ class uiResult extends BaseView {
 
 	private leaveRoomResponse()
 	{
+		GameData.isRoomOwner = false;
 	 	if(this.parent)	ContextManager.Instance.backSpecifiedUI(UIType.lobbyBoard);
 	}
 
