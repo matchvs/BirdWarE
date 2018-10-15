@@ -35,6 +35,8 @@ class uiResult extends BaseView {
 		let enemyIds = context.enemyIds;
 		let friendScore = context.friendScore;
 		let enemyScore = context.enemyScore;
+		let friendState = context.friendState;
+		let enemyState = context.enemyState;
 
 		this.playerScore.text = friendScore + "";
 		this.enemyScore.text = enemyScore + "";
@@ -47,18 +49,31 @@ class uiResult extends BaseView {
 		// 	year: (new Date()).getFullYear(),
 		// 	command: "setUserCloudStorage"
 		// });
-
-		if(friendScore >= enemyScore)
+		if(friendState == 1)
+		{
+			this.lose.visible = true;
+			this.win.visible = false;
+			var sound:egret.Sound = RES.getRes("lose_mp3");
+  			sound.play(0,1);
+		}else if(enemyState == 1)
 		{
 			this.win.visible = true;
 			this.lose.visible = false;
 			var sound:egret.Sound = RES.getRes("vitory_mp3");
   			sound.play(0,1);
 		}else{
-			this.lose.visible = true;
-			this.win.visible = false;
-			var sound:egret.Sound = RES.getRes("lose_mp3");
-  			sound.play(0,1);
+			if(friendScore >= enemyScore)
+			{
+				this.win.visible = true;
+				this.lose.visible = false;
+				var sound:egret.Sound = RES.getRes("vitory_mp3");
+				sound.play(0,1);
+			}else{
+				this.lose.visible = true;
+				this.win.visible = false;
+				var sound:egret.Sound = RES.getRes("lose_mp3");
+				sound.play(0,1);
+			}
 		}
 
 		for(let i=0;i<this.playerLayout.numChildren;i++)

@@ -120,7 +120,9 @@ class uiGame extends BaseView {
 	}
 
 	private friendIds = [];
+	private friendIdsState = [];
 	private enemyIds = [];
+	private enemyIdsState = [];
 	private initPlayers()
 	{
 		this.friendIds = [];
@@ -143,6 +145,17 @@ class uiGame extends BaseView {
 					this.enemyIds.push(GameData.playerUserIds[i]);
 			}
 		}
+		this.friendIdsState = [];
+		for(let i=0;i<this.friendIds.length;i++)
+		{
+			this.friendIdsState.push({id:this.friendIds[i],state:0});
+		}
+		this.enemyIdsState = [];
+		for(let i=0;i<this.enemyIds.length;i++)
+		{
+			this.enemyIdsState.push({id:this.enemyIds[i],state:0});
+		}
+
 		var team = [GameData.gameUser.id];
 		for(let i=0;i<this.friendIds.length;i++)
 		{
@@ -278,7 +291,20 @@ class uiGame extends BaseView {
 		let leaveRoom = ev.data;
 		let userid = leaveRoom.userId;
 		let self = this;
-
+	    let friend = this.friendIdsState.filter(function(x){
+			return x.id == userid;
+		});
+		for(let i=0;i<friend.length;i++)
+		{
+			friend[i].state = 1;
+		}
+		let enemy = this.enemyIdsState.filter(function(x){
+			return x.id == userid;
+		});
+		for(let i=0;i<enemy.length;i++)
+		{
+			enemy[i].state = 1;
+		}
 		if(GameData.maxPlayerNum > 2)
 		{
 			let cpProto = leaveRoom.cpProto;
@@ -293,7 +319,6 @@ class uiGame extends BaseView {
 					self.scheuleFire();
 					self.scheduleSpawItem();
 					self.countDown();	
-					console.log("我称为房主了")
 				}
 			}
 		}
@@ -317,6 +342,26 @@ class uiGame extends BaseView {
 
 		if(!this.gameover)
 		{
+			let friendState = 1;
+			for(let i=0;i<this.friendIdsState.length;i++)
+			{
+				if(this.friendIdsState[i].state == 0)
+				{
+					friendState = 0;
+					break;
+				}
+			}
+
+			let enemyState = 1;
+			for(let i=0;i<this.enemyIdsState.length;i++)
+			{
+				if(this.enemyIdsState[i].state == 0)
+				{
+					enemyState = 0;
+					break;
+				}
+			}
+
 			let friends = this.friendIds.filter(function(x){
 				return x == userid;
 			});
@@ -334,7 +379,9 @@ class uiGame extends BaseView {
 					sound.play(0,1);
 					setTimeout(function() {
 						var data = {
+							friendState:friendState,
 							friendIds:self.friendIds,
+							enemyState:enemyState,
 							enemyIds:self.enemyIds,
 							friendScore:3-self.enemyHeartNum,
 							enemyScore:3-self.friendHeartNum
@@ -354,7 +401,9 @@ class uiGame extends BaseView {
 					sound.play(0,1);
 					setTimeout(function() {
 						var data = {
+							friendState:friendState,
 							friendIds:self.friendIds,
+							enemyState:enemyState,
 							enemyIds:self.enemyIds,
 							friendScore:3-self.enemyHeartNum,
 							enemyScore:3-self.friendHeartNum
