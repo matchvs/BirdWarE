@@ -71,6 +71,7 @@ class uiMatch extends BaseView {
         mvs.MsResponse.getInstance.addEventListener(mvs.MsEvent.EVENT_LEAVEROOM_NTFY, this.leaveRoomNotify,this);
 
 		 mvs.MsResponse.getInstance.addEventListener(mvs.MsEvent.EVENT_ERROR_RSP, this.onErrorRsp,this);
+		 mvs.MsResponse.getInstance.addEventListener(mvs.MsEvent.EVENT_NETWORKSTATE_NTFY,this.networkStateNotify,this);
     }
 
 	private removeMsResponseListen()
@@ -88,6 +89,7 @@ class uiMatch extends BaseView {
         mvs.MsResponse.getInstance.removeEventListener(mvs.MsEvent.EVENT_LEAVEROOM_NTFY, this.leaveRoomNotify,this);
 
 		mvs.MsResponse.getInstance.removeEventListener(mvs.MsEvent.EVENT_ERROR_RSP, this.onErrorRsp,this);
+		mvs.MsResponse.getInstance.addEventListener(mvs.MsEvent.EVENT_NETWORKSTATE_NTFY,this.networkStateNotify,this);
 	}
 
 	private joinRoomResponse(event:egret.Event) {
@@ -172,6 +174,7 @@ class uiMatch extends BaseView {
 			return;
 		let leaveRoomInfo = ev.data;
 		let userID = leaveRoomInfo.userId;
+		let owner = leaveRoomInfo.owner;
 		let index = -1;
 		for(let i=0;i<this.gameUserList.length;i++)
 		{
@@ -189,7 +192,7 @@ class uiMatch extends BaseView {
 		{
 			this.playerIcons[i].setData(this.gameUserList[i]);
 		}
-		if(this.gameUserList[0] == GameData.gameUser.id)
+		if(owner == GameData.gameUser.id)
 		{
 			GameData.isRoomOwner = true;
 		}
@@ -207,6 +210,51 @@ class uiMatch extends BaseView {
 				mvs.MsEngine.getInstance.logOut();
 				ContextManager.Instance.backSpecifiedUI(UIType.loginBoard);
 			}, 5000);
+		}
+	}
+
+	private networkStateNotify(ev:egret.Event)
+	{
+		let data = ev.data;
+		let state = data.state;
+		let userID = data.userID;
+		let owner = data.owner;
+		if(state == 1)
+		{
+		
+			let tip = new uiTip("玩家"+userID+"网络断开连接");
+			this.addChild(tip);
+		}else if(state == 3)
+		{
+			let tip = new uiTip("玩家"+userID+"离开房间");
+			this.addChild(tip);
+
+			if(owner == GameData.gameUser.id)
+			{
+				GameData.isRoomOwner = true;
+			}
+
+			let index = -1;
+			for(let i=0;i<this.gameUserList.length;i++)
+			{
+				if(this.gameUserList[i] == userID)
+				{
+					index = i;
+				}
+			}
+			this.gameUserList.splice(index,1);
+			for(let i=0;i<this.playerIcons.length;i++)
+			{
+				this.playerIcons[i].init();
+			}
+			for(let i=0;i<this.gameUserList.length;i++)
+			{
+				this.playerIcons[i].setData(this.gameUserList[i]);
+			}
+			if(owner == GameData.gameUser.id)
+			{
+				GameData.isRoomOwner = true;
+			}
 		}
 	}
 }

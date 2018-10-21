@@ -15,6 +15,7 @@ class GameData {
     public static tagsMatch: number = 3; //指定属性匹配
     public static maxPlayerNum: number = 4;
     public static isRoomOwner: boolean = false;
+    public static roomOwnerID:number = 0;
     
     public static gameStartEvent: string = "gameStart";
     public static playerPositionEvent: string = "playerPosition";

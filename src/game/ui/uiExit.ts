@@ -40,10 +40,7 @@ class uiExit extends BaseView{
 				break;
 			}
 		}
-		var msg = JSON.stringify({
-			"roomOwner":GameData.isRoomOwner,
-			"newRoomOwner":newRoomOwner
-		});
-		mvs.MsEngine.getInstance.leaveRoom(msg);
+
+		mvs.MsEngine.getInstance.leaveRoom("");
 	}
 }
