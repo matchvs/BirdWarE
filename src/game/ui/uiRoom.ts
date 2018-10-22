@@ -117,6 +117,7 @@ class uiRoom extends BaseView {
 		}else{
 			let roomUserInfoList = context[1];
 			let roominfo = context[2];
+			GameData.isRoomOwner = false;
 			this.joinRoomInit(roomUserInfoList,roominfo);
 			this.refreshStartBtn();
 		}
@@ -236,6 +237,7 @@ class uiRoom extends BaseView {
 	private kickPlayerResponse(ev:egret.Event)
 	{
 		let rsp = ev.data;
+		let owner = rsp.owner;
 		for (var j = 0; j < this.players.length; j++) {
             if (this.players[j].userid === rsp.userID) {
                 this.players[j].init();
@@ -246,11 +248,30 @@ class uiRoom extends BaseView {
             GameData.isRoomOwner = false;
 			ContextManager.Instance.uiBack();
         }
+
+		if (GameData.gameUser.id === rsp.userId) {
+            GameData.isRoomOwner = false;
+			ContextManager.Instance.uiBack();
+        }
+
+		if(owner == GameData.gameUser.id)
+		{
+			GameData.isRoomOwner = true;
+		}
+
+		for (var i = 0; i < this.players.length; i++) {
+			if (this.players[i].userid !== 0) {
+				this.players[i].setData(this.players[i].userid, this.ownerid);
+			}
+		}
+      	this.refreshStartBtn();
 	}
 
 	private kickPlayerNotify(ev:egret.Event)
 	{
 		let rsp = ev.data;
+		let userID = rsp.userID;
+		let owner = rsp.owner;
 		for (var j = 0; j < this.players.length; j++) {
             if (this.players[j].userid === rsp.userId) {
                 this.players[j].init();
@@ -261,6 +282,18 @@ class uiRoom extends BaseView {
             GameData.isRoomOwner = false;
 			ContextManager.Instance.uiBack();
         }
+
+		if(owner == GameData.gameUser.id)
+		{
+			GameData.isRoomOwner = true;
+		}
+
+		for (var i = 0; i < this.players.length; i++) {
+			if (this.players[i].userid !== 0) {
+				this.players[i].setData(this.players[i].userid, this.ownerid);
+			}
+		}
+      	  this.refreshStartBtn();
 	}
 
 	private joinRoomResponse(ev:egret.Event)
@@ -338,32 +371,13 @@ class uiRoom extends BaseView {
 		let owner = data.owner;
 		if(state == 1)
 		{
-		
 			let tip = new uiTip("玩家"+userID+"网络断开连接");
 			this.addChild(tip);
+
+			//手动踢出房间
+			mvs.MsEngine.getInstance.kickPlayer(userID,"");
 		}else if(state == 3)
 		{
-			let tip = new uiTip("玩家"+userID+"离开房间");
-			this.addChild(tip);
-
-			if(owner == GameData.gameUser.id)
-			{
-				GameData.isRoomOwner = true;
-			}
-
-			for (var j = 0; j < this.players.length; j++) {
-				if (this.players[j].userid === userID) {
-					this.players[j].init();
-					break;
-				}
-        	}
-
-			for (var i = 0; i < this.players.length; i++) {
-				if (this.players[i].userid !== 0) {
-					this.players[i].setData(this.players[i].userid, this.ownerid);
-				}
-     	   }
-      	  this.refreshStartBtn();
 		}
 	}
 }
