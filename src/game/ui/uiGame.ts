@@ -274,6 +274,11 @@ class uiGame extends BaseView {
 		mvs.MsResponse.getInstance.addEventListener(mvs.MsEvent.EVENT_LEAVEROOM_RSP,this.leaveRoomResponse,this);
 
 		 mvs.MsResponse.getInstance.addEventListener(mvs.MsEvent.EVENT_ERROR_RSP, this.onErrorRsp,this);
+		 mvs.MsResponse.getInstance.addEventListener(mvs.MsEvent.EVENT_NETWORKSTATE_NTFY,this.networkStateNotify,this);
+
+		 //踢人
+        mvs.MsResponse.getInstance.addEventListener(mvs.MsEvent.EVENT_KICKPLAYER_RSP, this.kickPlayerResponse,this);
+        mvs.MsResponse.getInstance.addEventListener(mvs.MsEvent.EVENT_KICKPLAYER_NTFY, this.kickPlayerNotify,this);
     }
 
 	private removeMsResponseListen()
@@ -285,11 +290,17 @@ class uiGame extends BaseView {
 		mvs.MsResponse.getInstance.removeEventListener(mvs.MsEvent.EVENT_LEAVEROOM_RSP,this.leaveRoomResponse,this);
 
 		mvs.MsResponse.getInstance.removeEventListener(mvs.MsEvent.EVENT_ERROR_RSP,this.onErrorRsp,this);
+		mvs.MsResponse.getInstance.removeEventListener(mvs.MsEvent.EVENT_NETWORKSTATE_NTFY,this.networkStateNotify,this);
+
+		//踢人
+        mvs.MsResponse.getInstance.removeEventListener(mvs.MsEvent.EVENT_KICKPLAYER_RSP, this.kickPlayerResponse,this);
+        mvs.MsResponse.getInstance.removeEventListener(mvs.MsEvent.EVENT_KICKPLAYER_NTFY, this.kickPlayerNotify,this);
 	}
 	
 	private leaveRoomNotify(ev:egret.Event) {
 		let leaveRoom = ev.data;
 		let userid = leaveRoom.userId;
+		let ownerId = leaveRoom.owner;
 		let self = this;
 	    let friend = this.friendIdsState.filter(function(x){
 			return x.id == userid;
@@ -307,19 +318,14 @@ class uiGame extends BaseView {
 		}
 		if(GameData.maxPlayerNum > 2)
 		{
-			let cpProto = leaveRoom.cpProto;
-			var info = JSON.parse(cpProto);
-			let roomOwner = info.roomOwner;
-			if(roomOwner)
+		
+			let newRoomOwner = ownerId;
+			if(GameData.gameUser.id == newRoomOwner)
 			{
-				let newRoomOwner = info.newRoomOwner;
-				if(GameData.gameUser.id == newRoomOwner)
-				{
-					GameData.isRoomOwner = true;
-					self.scheuleFire();
-					self.scheduleSpawItem();
-					self.countDown();	
-				}
+				GameData.isRoomOwner = true;
+				self.scheuleFire();
+				self.scheduleSpawItem();
+				self.countDown();	
 			}
 		}
 
@@ -976,6 +982,393 @@ class uiGame extends BaseView {
 				mvs.MsEngine.getInstance.logOut();
 				ContextManager.Instance.backSpecifiedUI(UIType.loginBoard);
 			}, 5000);
+		}
+	}
+
+	private kickPlayerResponse(ev:egret.Event)
+	{
+		let data = ev.data;
+		let userid = data.userID;
+		let ownerId = data.owner;
+		let self = this;
+		let friend = this.friendIdsState.filter(function(x){
+			return x.id == userid;
+		});
+		for(let i=0;i<friend.length;i++)
+		{
+			friend[i].state = 1;
+		}
+		let enemy = this.enemyIdsState.filter(function(x){
+			return x.id == userid;
+		});
+		for(let i=0;i<enemy.length;i++)
+		{
+			enemy[i].state = 1;
+		}
+		if(GameData.maxPlayerNum > 2)
+		{
+		
+			let newRoomOwner = ownerId;
+			if(GameData.gameUser.id == newRoomOwner)
+			{
+				GameData.isRoomOwner = true;
+				self.scheuleFire();
+				self.scheduleSpawItem();
+				self.countDown();	
+			}
+		}
+
+		if(userid != GameData.gameUser.id)
+		{
+			if(!this.gameover){
+				let friends = this.friendIds.filter(function(x){
+					return x == userid;
+				});
+				let tip:uiTip;
+				if(friends.length > 0)
+				{
+					tip = new uiTip("队友离开了游戏");
+				}else{
+					tip = new uiTip("对手离开了游戏");
+				}
+				this.addChild(tip);
+			}
+		}
+
+		if(!this.gameover)
+		{
+			let friendState = 1;
+			for(let i=0;i<this.friendIdsState.length;i++)
+			{
+				if(this.friendIdsState[i].state == 0)
+				{
+					friendState = 0;
+					break;
+				}
+			}
+
+				let enemyState = 1;
+				for(let i=0;i<this.enemyIdsState.length;i++)
+				{
+					if(this.enemyIdsState[i].state == 0)
+					{
+						enemyState = 0;
+						break;
+					}
+				}
+
+				let friends = this.friendIds.filter(function(x){
+					return x == userid;
+				});
+
+				if(friends.length > 0)
+				{
+					this.friendNum --;
+					if(this.friendNum == 0)
+					{
+						this.gameover = true;
+						this.gamestart = false;
+						var loseCamp:Camp = Camp.friend;
+						this.gameoverAni.play(0);
+						var sound:egret.Sound = RES.getRes("gameover_mp3");
+						sound.play(0,1);
+						setTimeout(function() {
+							var data = {
+								friendState:friendState,
+								friendIds:self.friendIds,
+								enemyState:enemyState,
+								enemyIds:self.enemyIds,
+								friendScore:3-self.enemyHeartNum,
+								enemyScore:3-self.friendHeartNum
+							}
+							ContextManager.Instance.showUI(UIType.gameOver,data)
+						}, 2000);
+					}
+				}else{
+					this.enemyNum --;
+					if(this.enemyNum == 0)
+					{
+						this.gameover = true;
+						this.gamestart = false;
+						var loseCamp:Camp = Camp.enemy;
+						this.gameoverAni.play(0);
+						var sound:egret.Sound = RES.getRes("gameover_mp3");
+						sound.play(0,1);
+						setTimeout(function() {
+							var data = {
+								friendState:friendState,
+								friendIds:self.friendIds,
+								enemyState:enemyState,
+								enemyIds:self.enemyIds,
+								friendScore:3-self.enemyHeartNum,
+								enemyScore:3-self.friendHeartNum
+							}
+							ContextManager.Instance.showUI(UIType.gameOver,data)
+						}, 2000);
+					}
+				}
+			}
+	}
+
+	private kickPlayerNotify(ev:egret.Event)
+	{
+		let data = ev.data;
+		let userid = data.userID;
+		let ownerId = data.owner;
+		let self = this;
+		let friend = this.friendIdsState.filter(function(x){
+			return x.id == userid;
+		});
+		for(let i=0;i<friend.length;i++)
+		{
+			friend[i].state = 1;
+		}
+		let enemy = this.enemyIdsState.filter(function(x){
+			return x.id == userid;
+		});
+		for(let i=0;i<enemy.length;i++)
+		{
+			enemy[i].state = 1;
+		}
+		if(GameData.maxPlayerNum > 2)
+		{
+		
+			let newRoomOwner = ownerId;
+			if(GameData.gameUser.id == newRoomOwner)
+			{
+				GameData.isRoomOwner = true;
+				self.scheuleFire();
+				self.scheduleSpawItem();
+				self.countDown();	
+			}
+		}
+
+		if(userid != GameData.gameUser.id)
+		{
+			if(!this.gameover){
+				let friends = this.friendIds.filter(function(x){
+					return x == userid;
+				});
+				let tip:uiTip;
+				if(friends.length > 0)
+				{
+					tip = new uiTip("队友离开了游戏");
+				}else{
+					tip = new uiTip("对手离开了游戏");
+				}
+				this.addChild(tip);
+			}
+		}
+
+		if(!this.gameover)
+		{
+			let friendState = 1;
+			for(let i=0;i<this.friendIdsState.length;i++)
+			{
+				if(this.friendIdsState[i].state == 0)
+				{
+					friendState = 0;
+					break;
+				}
+			}
+
+				let enemyState = 1;
+				for(let i=0;i<this.enemyIdsState.length;i++)
+				{
+					if(this.enemyIdsState[i].state == 0)
+					{
+						enemyState = 0;
+						break;
+					}
+				}
+
+				let friends = this.friendIds.filter(function(x){
+					return x == userid;
+				});
+
+				if(friends.length > 0)
+				{
+					this.friendNum --;
+					if(this.friendNum == 0)
+					{
+						this.gameover = true;
+						this.gamestart = false;
+						var loseCamp:Camp = Camp.friend;
+						this.gameoverAni.play(0);
+						var sound:egret.Sound = RES.getRes("gameover_mp3");
+						sound.play(0,1);
+						setTimeout(function() {
+							var data = {
+								friendState:friendState,
+								friendIds:self.friendIds,
+								enemyState:enemyState,
+								enemyIds:self.enemyIds,
+								friendScore:3-self.enemyHeartNum,
+								enemyScore:3-self.friendHeartNum
+							}
+							ContextManager.Instance.showUI(UIType.gameOver,data)
+						}, 2000);
+					}
+				}else{
+					this.enemyNum --;
+					if(this.enemyNum == 0)
+					{
+						this.gameover = true;
+						this.gamestart = false;
+						var loseCamp:Camp = Camp.enemy;
+						this.gameoverAni.play(0);
+						var sound:egret.Sound = RES.getRes("gameover_mp3");
+						sound.play(0,1);
+						setTimeout(function() {
+							var data = {
+								friendState:friendState,
+								friendIds:self.friendIds,
+								enemyState:enemyState,
+								enemyIds:self.enemyIds,
+								friendScore:3-self.enemyHeartNum,
+								enemyScore:3-self.friendHeartNum
+							}
+							ContextManager.Instance.showUI(UIType.gameOver,data)
+						}, 2000);
+					}
+				}
+			}
+	}
+
+	private networkStateNotify(ev:egret.Event)
+	{
+		let data = ev.data;
+		let state = data.state;
+		let userid = data.userID;
+		let ownerId = data.owner;
+		if(state == 1)
+		{
+			let tip = new uiTip("玩家"+userid+"网络断开连接");
+			this.addChild(tip);
+			mvs.MsEngine.getInstance.kickPlayer(userid,"");
+		}else if(state == 3)
+		{
+			// let tip = new uiTip("玩家"+userid+"离开房间");
+			// this.addChild(tip);
+
+			// let self = this;
+			// let friend = this.friendIdsState.filter(function(x){
+			// 	return x.id == userid;
+			// });
+			// for(let i=0;i<friend.length;i++)
+			// {
+			// 	friend[i].state = 1;
+			// }
+			// let enemy = this.enemyIdsState.filter(function(x){
+			// 	return x.id == userid;
+			// });
+			// for(let i=0;i<enemy.length;i++)
+			// {
+			// 	enemy[i].state = 1;
+			// }
+			// if(GameData.maxPlayerNum > 2)
+			// {
+			
+			// 	let newRoomOwner = ownerId;
+			// 	if(GameData.gameUser.id == newRoomOwner)
+			// 	{
+			// 		GameData.isRoomOwner = true;
+			// 		self.scheuleFire();
+			// 		self.scheduleSpawItem();
+			// 		self.countDown();	
+			// 	}
+			// }
+
+			// if(userid != GameData.gameUser.id)
+			// {
+			// 	if(!this.gameover){
+			// 		let friends = this.friendIds.filter(function(x){
+			// 			return x == userid;
+			// 		});
+			// 		let tip:uiTip;
+			// 		if(friends.length > 0)
+			// 		{
+			// 			tip = new uiTip("队友离开了游戏");
+			// 		}else{
+			// 			tip = new uiTip("对手离开了游戏");
+			// 		}
+			// 		this.addChild(tip);
+			// 	}
+			// }
+
+			// if(!this.gameover)
+			// {
+			// 	let friendState = 1;
+			// 	for(let i=0;i<this.friendIdsState.length;i++)
+			// 	{
+			// 		if(this.friendIdsState[i].state == 0)
+			// 		{
+			// 			friendState = 0;
+			// 			break;
+			// 		}
+			// 	}
+
+			// 		let enemyState = 1;
+			// 		for(let i=0;i<this.enemyIdsState.length;i++)
+			// 		{
+			// 			if(this.enemyIdsState[i].state == 0)
+			// 			{
+			// 				enemyState = 0;
+			// 				break;
+			// 			}
+			// 		}
+
+			// 		let friends = this.friendIds.filter(function(x){
+			// 			return x == userid;
+			// 		});
+
+			// 		if(friends.length > 0)
+			// 		{
+			// 			this.friendNum --;
+			// 			if(this.friendNum == 0)
+			// 			{
+			// 				this.gameover = true;
+			// 				this.gamestart = false;
+			// 				var loseCamp:Camp = Camp.friend;
+			// 				this.gameoverAni.play(0);
+			// 				var sound:egret.Sound = RES.getRes("gameover_mp3");
+			// 				sound.play(0,1);
+			// 				setTimeout(function() {
+			// 					var data = {
+			// 						friendState:friendState,
+			// 						friendIds:self.friendIds,
+			// 						enemyState:enemyState,
+			// 						enemyIds:self.enemyIds,
+			// 						friendScore:3-self.enemyHeartNum,
+			// 						enemyScore:3-self.friendHeartNum
+			// 					}
+			// 					ContextManager.Instance.showUI(UIType.gameOver,data)
+			// 				}, 2000);
+			// 			}
+			// 		}else{
+			// 			this.enemyNum --;
+			// 			if(this.enemyNum == 0)
+			// 			{
+			// 				this.gameover = true;
+			// 				this.gamestart = false;
+			// 				var loseCamp:Camp = Camp.enemy;
+			// 				this.gameoverAni.play(0);
+			// 				var sound:egret.Sound = RES.getRes("gameover_mp3");
+			// 				sound.play(0,1);
+			// 				setTimeout(function() {
+			// 					var data = {
+			// 						friendState:friendState,
+			// 						friendIds:self.friendIds,
+			// 						enemyState:enemyState,
+			// 						enemyIds:self.enemyIds,
+			// 						friendScore:3-self.enemyHeartNum,
+			// 						enemyScore:3-self.friendHeartNum
+			// 					}
+			// 					ContextManager.Instance.showUI(UIType.gameOver,data)
+			// 				}, 2000);
+			// 			}
+			// 		}
+				// }
 		}
 	}
 }
