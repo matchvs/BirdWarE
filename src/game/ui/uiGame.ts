@@ -318,7 +318,6 @@ class uiGame extends BaseView {
 		}
 		if(GameData.maxPlayerNum > 2)
 		{
-		
 			let newRoomOwner = ownerId;
 			if(GameData.gameUser.id == newRoomOwner)
 			{
@@ -990,8 +989,11 @@ class uiGame extends BaseView {
 		let data = ev.data;
 		let userid = data.userID;
 		let ownerId = data.owner;
+		if(data.status != 200)
+			return;
+
 		let self = this;
-		let friend = this.friendIdsState.filter(function(x){
+		 let friend = this.friendIdsState.filter(function(x){
 			return x.id == userid;
 		});
 		for(let i=0;i<friend.length;i++)
@@ -1007,7 +1009,6 @@ class uiGame extends BaseView {
 		}
 		if(GameData.maxPlayerNum > 2)
 		{
-		
 			let newRoomOwner = ownerId;
 			if(GameData.gameUser.id == newRoomOwner)
 			{
@@ -1047,67 +1048,67 @@ class uiGame extends BaseView {
 				}
 			}
 
-				let enemyState = 1;
-				for(let i=0;i<this.enemyIdsState.length;i++)
+			let enemyState = 1;
+			for(let i=0;i<this.enemyIdsState.length;i++)
+			{
+				if(this.enemyIdsState[i].state == 0)
 				{
-					if(this.enemyIdsState[i].state == 0)
-					{
-						enemyState = 0;
-						break;
-					}
-				}
-
-				let friends = this.friendIds.filter(function(x){
-					return x == userid;
-				});
-
-				if(friends.length > 0)
-				{
-					this.friendNum --;
-					if(this.friendNum == 0)
-					{
-						this.gameover = true;
-						this.gamestart = false;
-						var loseCamp:Camp = Camp.friend;
-						this.gameoverAni.play(0);
-						var sound:egret.Sound = RES.getRes("gameover_mp3");
-						sound.play(0,1);
-						setTimeout(function() {
-							var data = {
-								friendState:friendState,
-								friendIds:self.friendIds,
-								enemyState:enemyState,
-								enemyIds:self.enemyIds,
-								friendScore:3-self.enemyHeartNum,
-								enemyScore:3-self.friendHeartNum
-							}
-							ContextManager.Instance.showUI(UIType.gameOver,data)
-						}, 2000);
-					}
-				}else{
-					this.enemyNum --;
-					if(this.enemyNum == 0)
-					{
-						this.gameover = true;
-						this.gamestart = false;
-						var loseCamp:Camp = Camp.enemy;
-						this.gameoverAni.play(0);
-						var sound:egret.Sound = RES.getRes("gameover_mp3");
-						sound.play(0,1);
-						setTimeout(function() {
-							var data = {
-								friendState:friendState,
-								friendIds:self.friendIds,
-								enemyState:enemyState,
-								enemyIds:self.enemyIds,
-								friendScore:3-self.enemyHeartNum,
-								enemyScore:3-self.friendHeartNum
-							}
-							ContextManager.Instance.showUI(UIType.gameOver,data)
-						}, 2000);
-					}
+					enemyState = 0;
+					break;
 				}
 			}
+
+			let friends = this.friendIds.filter(function(x){
+				return x == userid;
+			});
+
+			if(friends.length > 0)
+			{
+				this.friendNum --;
+				if(this.friendNum == 0)
+				{
+					this.gameover = true;
+					this.gamestart = false;
+					var loseCamp:Camp = Camp.friend;
+					this.gameoverAni.play(0);
+					var sound:egret.Sound = RES.getRes("gameover_mp3");
+					sound.play(0,1);
+					setTimeout(function() {
+						var data = {
+							friendState:friendState,
+							friendIds:self.friendIds,
+							enemyState:enemyState,
+							enemyIds:self.enemyIds,
+							friendScore:3-self.enemyHeartNum,
+							enemyScore:3-self.friendHeartNum
+						}
+						ContextManager.Instance.showUI(UIType.gameOver,data)
+					}, 2000);
+				}
+			}else{
+				this.enemyNum --;
+				if(this.enemyNum == 0)
+				{
+					this.gameover = true;
+					this.gamestart = false;
+					var loseCamp:Camp = Camp.enemy;
+					this.gameoverAni.play(0);
+					var sound:egret.Sound = RES.getRes("gameover_mp3");
+					sound.play(0,1);
+					setTimeout(function() {
+						var data = {
+							friendState:friendState,
+							friendIds:self.friendIds,
+							enemyState:enemyState,
+							enemyIds:self.enemyIds,
+							friendScore:3-self.enemyHeartNum,
+							enemyScore:3-self.friendHeartNum
+						}
+						ContextManager.Instance.showUI(UIType.gameOver,data)
+					}, 2000);
+				}
+			}
+		}
 	}
 
 	private kickPlayerNotify(ev:egret.Event)
@@ -1116,7 +1117,7 @@ class uiGame extends BaseView {
 		let userid = data.userID;
 		let ownerId = data.owner;
 		let self = this;
-		let friend = this.friendIdsState.filter(function(x){
+		 let friend = this.friendIdsState.filter(function(x){
 			return x.id == userid;
 		});
 		for(let i=0;i<friend.length;i++)
@@ -1132,7 +1133,6 @@ class uiGame extends BaseView {
 		}
 		if(GameData.maxPlayerNum > 2)
 		{
-		
 			let newRoomOwner = ownerId;
 			if(GameData.gameUser.id == newRoomOwner)
 			{
@@ -1172,67 +1172,67 @@ class uiGame extends BaseView {
 				}
 			}
 
-				let enemyState = 1;
-				for(let i=0;i<this.enemyIdsState.length;i++)
+			let enemyState = 1;
+			for(let i=0;i<this.enemyIdsState.length;i++)
+			{
+				if(this.enemyIdsState[i].state == 0)
 				{
-					if(this.enemyIdsState[i].state == 0)
-					{
-						enemyState = 0;
-						break;
-					}
-				}
-
-				let friends = this.friendIds.filter(function(x){
-					return x == userid;
-				});
-
-				if(friends.length > 0)
-				{
-					this.friendNum --;
-					if(this.friendNum == 0)
-					{
-						this.gameover = true;
-						this.gamestart = false;
-						var loseCamp:Camp = Camp.friend;
-						this.gameoverAni.play(0);
-						var sound:egret.Sound = RES.getRes("gameover_mp3");
-						sound.play(0,1);
-						setTimeout(function() {
-							var data = {
-								friendState:friendState,
-								friendIds:self.friendIds,
-								enemyState:enemyState,
-								enemyIds:self.enemyIds,
-								friendScore:3-self.enemyHeartNum,
-								enemyScore:3-self.friendHeartNum
-							}
-							ContextManager.Instance.showUI(UIType.gameOver,data)
-						}, 2000);
-					}
-				}else{
-					this.enemyNum --;
-					if(this.enemyNum == 0)
-					{
-						this.gameover = true;
-						this.gamestart = false;
-						var loseCamp:Camp = Camp.enemy;
-						this.gameoverAni.play(0);
-						var sound:egret.Sound = RES.getRes("gameover_mp3");
-						sound.play(0,1);
-						setTimeout(function() {
-							var data = {
-								friendState:friendState,
-								friendIds:self.friendIds,
-								enemyState:enemyState,
-								enemyIds:self.enemyIds,
-								friendScore:3-self.enemyHeartNum,
-								enemyScore:3-self.friendHeartNum
-							}
-							ContextManager.Instance.showUI(UIType.gameOver,data)
-						}, 2000);
-					}
+					enemyState = 0;
+					break;
 				}
 			}
+
+			let friends = this.friendIds.filter(function(x){
+				return x == userid;
+			});
+
+			if(friends.length > 0)
+			{
+				this.friendNum --;
+				if(this.friendNum == 0)
+				{
+					this.gameover = true;
+					this.gamestart = false;
+					var loseCamp:Camp = Camp.friend;
+					this.gameoverAni.play(0);
+					var sound:egret.Sound = RES.getRes("gameover_mp3");
+					sound.play(0,1);
+					setTimeout(function() {
+						var data = {
+							friendState:friendState,
+							friendIds:self.friendIds,
+							enemyState:enemyState,
+							enemyIds:self.enemyIds,
+							friendScore:3-self.enemyHeartNum,
+							enemyScore:3-self.friendHeartNum
+						}
+						ContextManager.Instance.showUI(UIType.gameOver,data)
+					}, 2000);
+				}
+			}else{
+				this.enemyNum --;
+				if(this.enemyNum == 0)
+				{
+					this.gameover = true;
+					this.gamestart = false;
+					var loseCamp:Camp = Camp.enemy;
+					this.gameoverAni.play(0);
+					var sound:egret.Sound = RES.getRes("gameover_mp3");
+					sound.play(0,1);
+					setTimeout(function() {
+						var data = {
+							friendState:friendState,
+							friendIds:self.friendIds,
+							enemyState:enemyState,
+							enemyIds:self.enemyIds,
+							friendScore:3-self.enemyHeartNum,
+							enemyScore:3-self.friendHeartNum
+						}
+						ContextManager.Instance.showUI(UIType.gameOver,data)
+					}, 2000);
+				}
+			}
+		}
 	}
 
 	private networkStateNotify(ev:egret.Event)

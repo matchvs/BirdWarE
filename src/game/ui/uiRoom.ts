@@ -249,11 +249,7 @@ class uiRoom extends BaseView {
 			ContextManager.Instance.uiBack();
         }
 
-		if (GameData.gameUser.id === rsp.userId) {
-            GameData.isRoomOwner = false;
-			ContextManager.Instance.uiBack();
-        }
-
+		this.ownerid = owner;
 		if(owner == GameData.gameUser.id)
 		{
 			GameData.isRoomOwner = true;
