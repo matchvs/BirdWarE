@@ -3,9 +3,10 @@
 	<w:Config id="164ccbca1b7" ></w:Config>
 		<e:Group anchorOffsetX="68.5" anchorOffsetY="93" y="108" x="72.5">
 		<e:Group id="common" x="4.02" y="3.35">
-			<e:Image source="def-user-squ_png" x="0" y="0"/>
+			<e:Image id="avatarMask" source="def-user-squ_png" fillMode="scale"/>
+			<e:Image id="avatar" source="def-user-squ_png" x="0" y="0" fillMode="scale" width="125" height="125"/>
 			<e:Image x="0" y="100" anchorOffsetX="0" width="125" anchorOffsetY="0" height="25" source=""/>
-			<e:Label id="username" text="226300" x="42.17" y="103.17" anchorOffsetY="0" height="21.33" size="15" verticalAlign="middle"/>
+			<e:Label id="username" text="226300" x="2.97" y="103.17" anchorOffsetY="0" height="21.33" size="15" verticalAlign="middle" textAlign="center" anchorOffsetX="0" width="121.6"/>
 		</e:Group>
 		<e:Group id="default" x="0" y="0">
 			<e:Image width="124" height="123.2" x="6.61" y="5.3" anchorOffsetX="0" anchorOffsetY="0" alpha="0.6" source=""/>
@@ -13,7 +14,7 @@
 			<e:Image source="bar-user2.1_png" y="-1"/>
 			<e:Image x="6.11" y="102.85" anchorOffsetX="0" width="125" anchorOffsetY="0" height="25" source=""/>
 		</e:Group>
-		<e:Group id="type1" x="0" y="0">
+		<e:Group id="type1" x="1" y="0">
 			<e:Image x="0" y="0" source="bar-user1.2_png"/>
 			<e:Image x="1.67" y="146.35" source="bar-user1.1_png"/>
 			<e:Label text="房主" x="54.19" y="155.85" size="20"/>

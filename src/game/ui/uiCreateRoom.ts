@@ -79,7 +79,7 @@ class uiCreateRoom extends BaseView {
 		let roomName = this.roomName.text;
 
 		let create:MsCreateRoomInfo = new MsCreateRoomInfo(roomName,this.num,0,0,1,"");
-		mvs.MsEngine.getInstance.createRoom(create,JSON.stringify({name:GameData.gameUser.name,avatar:GameData.gameUser.avatar}));
+		mvs.MsEngine.getInstance.createRoom(create,JSON.stringify({"id":GameData.gameUser.id,"nickName":GameData.gameUser.name,"avatar":GameData.gameUser.avatar}));
 	}
 
 	private createRoomResponse(ev:egret.Event)

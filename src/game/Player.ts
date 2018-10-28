@@ -17,6 +17,7 @@ class Player extends eui.Component implements  eui.UIComponent {
 	private flySpeed = 600;
 	private ceilY = 430;
 	private groundY = -580;
+	private profile;
 	private userId;
 	private isShield = false;
 	private isTrack = false;
@@ -35,6 +36,16 @@ class Player extends eui.Component implements  eui.UIComponent {
 	public get Camp()
 	{
 		return this.camp;
+	}
+
+	public set Profile(val)
+	{
+		this.profile = val;
+	}
+
+	public get Profile()
+	{
+		return this.profile;
 	}
 
 	public set UserId(val)

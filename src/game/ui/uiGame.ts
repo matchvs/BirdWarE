@@ -91,26 +91,6 @@ class uiGame extends BaseView {
 			this.enemyHeart.getChildAt(i).visible = true
 		}
 
-		if(GameData.maxPlayerNum == 2)
-		{
-			this.playerIcon1.visible = false;
-			this.enemyIcon1.visible = false;
-			this.playerIcon2.visible = true;
-			this.playerIcon2.setData(GameData.playerUserIds[0]);
-			this.enemyIcon2.visible = true;
-			this.enemyIcon2.setData(GameData.playerUserIds[1]);
-			this.enemyNum = this.friendNum = 1;
-		}else{
-			this.playerIcon1.visible = true;
-			this.playerIcon1.setData(GameData.playerUserIds[0]);
-			this.playerIcon2.visible = true;
-			this.playerIcon2.setData(GameData.playerUserIds[1]);
-			this.enemyIcon1.visible = true;
-			this.enemyIcon1.setData(GameData.playerUserIds[2]);
-			this.enemyIcon2.visible = true;
-			this.enemyIcon2.setData(GameData.playerUserIds[3]);
-			this.enemyNum = this.friendNum = 2;
-		}
 		this.addEventListener(egret.TouchEvent.TOUCH_TAP,this.onTouchEvent,this);	
 
 		this.gamestart = false;
@@ -119,61 +99,72 @@ class uiGame extends BaseView {
 		this.roundStart();
 	}
 
-	private friendIds = [];
+	private friends = [];
 	private friendIdsState = [];
-	private enemyIds = [];
+	private enemys = [];
 	private enemyIdsState = [];
 	private initPlayers()
 	{
-		this.friendIds = [];
-		this.enemyIds = [];
-		GameData.playerUserIds.sort(function(a,b){return a-b;});
-		let index = GameData.playerUserIds.indexOf(GameData.gameUser.id);
-		//分组
-		for(let i=0;i<GameData.playerUserIds.length;i++)
+		this.friends = [];
+		this.enemys = [];
+		GameData.playerUserProfiles.sort(function(a,b){return a.id-b.id;});
+		// let index = GameData.playerInfos.indexOf(GameData.gameUser.id);
+		let index = -1;
+		for(let i=0;i<GameData.playerUserProfiles.length;i++)
 		{
-			if(i<GameData.playerUserIds.length/2)
+			let userProfile = GameData.playerUserProfiles[i];
+			let id = userProfile.id;
+			if(GameData.gameUser.id == id)
 			{
-				if(index < GameData.playerUserIds.length/2)
-					this.friendIds.push(GameData.playerUserIds[i]);
+				index = i;
+				break;
+			}
+		}
+		//分组
+		for(let i=0;i<GameData.playerUserProfiles.length;i++)
+		{
+			if(i<GameData.playerUserProfiles.length/2)
+			{
+				if(index < GameData.playerUserProfiles.length/2)
+					this.friends.push(GameData.playerUserProfiles[i]);
 				else
-					this.enemyIds.push(GameData.playerUserIds[i]);
+					this.enemys.push(GameData.playerUserProfiles[i]);
 			}else{
-				if(index >= GameData.playerUserIds.length/2)
-					this.friendIds.push(GameData.playerUserIds[i]);
+				if(index >= GameData.playerUserProfiles.length/2)
+					this.friends.push(GameData.playerUserProfiles[i]);
 				else
-					this.enemyIds.push(GameData.playerUserIds[i]);
+					this.enemys.push(GameData.playerUserProfiles[i]);
 			}
 		}
 		this.friendIdsState = [];
-		for(let i=0;i<this.friendIds.length;i++)
+		for(let i=0;i<this.friends.length;i++)
 		{
-			this.friendIdsState.push({id:this.friendIds[i],state:0});
+			this.friendIdsState.push({id:this.friends[i].id,state:0});
 		}
 		this.enemyIdsState = [];
-		for(let i=0;i<this.enemyIds.length;i++)
+		for(let i=0;i<this.enemys.length;i++)
 		{
-			this.enemyIdsState.push({id:this.enemyIds[i],state:0});
+			this.enemyIdsState.push({id:this.enemys[i].id,state:0});
 		}
 
-		var team = [GameData.gameUser.id];
-		for(let i=0;i<this.friendIds.length;i++)
+		var team = [{"id":GameData.gameUser.id,"nickName":GameData.gameUser.name,"avatar":GameData.gameUser.avatar}];
+		for(let i=0;i<this.friends.length;i++)
 		{
-			if(this.friendIds[i] != GameData.gameUser.id)
+			if(this.friends[i].id != GameData.gameUser.id)
 			{
-				team.push(this.friendIds[i]);
+				team.push(this.friends[i]);
 			}
 		}
-		for(let i=0;i<this.enemyIds.length;i++)
+		for(let i=0;i<this.enemys.length;i++)
 		{
-			team.push(this.enemyIds[i]);
+			team.push(this.enemys[i]);
 		}
 		
-		GameData.playerUserIds = team;
+		GameData.playerUserProfiles = team;
 		var playerScript = null;
 		if(this.players && this.players.length > 0)
 		{
-			var campFlg = GameData.playerUserIds.length / 2;
+			var campFlg = GameData.playerUserProfiles.length / 2;
 			for(var j=0;j<this.players.length;j++)
 			{
 				playerScript = this.players[j];
@@ -206,8 +197,8 @@ class uiGame extends BaseView {
 		{
 			var player = null;
 			this.players = [];
-			var campFlg = GameData.playerUserIds.length / 2;
-			for(var i=0;i<GameData.playerUserIds.length;i++)
+			var campFlg = GameData.playerUserProfiles.length / 2;
+			for(var i=0;i<GameData.playerUserProfiles.length;i++)
 			{
 				if(i<campFlg)
 				{
@@ -236,9 +227,37 @@ class uiGame extends BaseView {
 					player.Camp = Camp.enemy;
 				}
 				this.addChild(player);				
-				player.UserId = GameData.playerUserIds[i];
+				player.UserId = GameData.playerUserProfiles[i].id;
 				this.players.push(player);
 			}
+
+			GameData.playerUserIds=[];
+			for(let i=0;i<GameData.playerUserProfiles.length;i++)
+			{
+				let id = GameData.playerUserProfiles[i].id;
+				GameData.playerUserIds.push(id);
+			}
+		}
+
+			if(GameData.maxPlayerNum == 2)
+		{
+			this.playerIcon1.visible = false;
+			this.enemyIcon1.visible = false;
+			this.playerIcon2.visible = true;
+			this.playerIcon2.setData(GameData.playerUserProfiles[0]);
+			this.enemyIcon2.visible = true;
+			this.enemyIcon2.setData(GameData.playerUserProfiles[1]);
+			this.enemyNum = this.friendNum = 1;
+		}else{
+			this.playerIcon1.visible = true;
+			this.playerIcon1.setData(GameData.playerUserProfiles[0]);
+			this.playerIcon2.visible = true;
+			this.playerIcon2.setData(GameData.playerUserProfiles[1]);
+			this.enemyIcon1.visible = true;
+			this.enemyIcon1.setData(GameData.playerUserProfiles[2]);
+			this.enemyIcon2.visible = true;
+			this.enemyIcon2.setData(GameData.playerUserProfiles[3]);
+			this.enemyNum = this.friendNum = 2;
 		}
 	}
 
@@ -331,7 +350,7 @@ class uiGame extends BaseView {
 		if(userid != GameData.gameUser.id)
 		{
 			if(!this.gameover){
-				let friends = this.friendIds.filter(function(x){
+				let friends = this.friends.filter(function(x){
 					return x == userid;
 				});
 				let tip:uiTip;
@@ -367,7 +386,7 @@ class uiGame extends BaseView {
 				}
 			}
 
-			let friends = this.friendIds.filter(function(x){
+			let friends = this.friends.filter(function(x){
 				return x == userid;
 			});
 
@@ -385,9 +404,9 @@ class uiGame extends BaseView {
 					setTimeout(function() {
 						var data = {
 							friendState:friendState,
-							friendIds:self.friendIds,
+							friendIds:self.friends,
 							enemyState:enemyState,
-							enemyIds:self.enemyIds,
+							enemyIds:self.enemys,
 							friendScore:3-self.enemyHeartNum,
 							enemyScore:3-self.friendHeartNum
 						}
@@ -407,9 +426,9 @@ class uiGame extends BaseView {
 					setTimeout(function() {
 						var data = {
 							friendState:friendState,
-							friendIds:self.friendIds,
+							friendIds:self.friends,
 							enemyState:enemyState,
-							enemyIds:self.enemyIds,
+							enemyIds:self.enemys,
 							friendScore:3-self.enemyHeartNum,
 							enemyScore:3-self.friendHeartNum
 						}
@@ -715,8 +734,8 @@ class uiGame extends BaseView {
   			sound.play(0,1);
 			setTimeout(function() {
 				var data = {
-					friendIds:self.friendIds,
-					enemyIds:self.enemyIds,
+					friendIds:self.friends,
+					enemyIds:self.enemys,
 					friendScore:3-self.enemyHeartNum,
 					enemyScore:3-self.friendHeartNum
 				}
@@ -795,7 +814,7 @@ class uiGame extends BaseView {
 						{
 							var offset = (j-bulletCnt/2) * 40;
 							//var pos = player.localToGlobal(player.firepoint.x,player.firepoint.y);
-							data.push({playerID:player.userId,offset:offset});
+							data.push({playerID:player.UserId,offset:offset});
 						}
 					}
 				}
@@ -1022,7 +1041,7 @@ class uiGame extends BaseView {
 		if(userid != GameData.gameUser.id)
 		{
 			if(!this.gameover){
-				let friends = this.friendIds.filter(function(x){
+				let friends = this.friends.filter(function(x){
 					return x == userid;
 				});
 				let tip:uiTip;
@@ -1058,7 +1077,7 @@ class uiGame extends BaseView {
 				}
 			}
 
-			let friends = this.friendIds.filter(function(x){
+			let friends = this.friends.filter(function(x){
 				return x == userid;
 			});
 
@@ -1076,9 +1095,9 @@ class uiGame extends BaseView {
 					setTimeout(function() {
 						var data = {
 							friendState:friendState,
-							friendIds:self.friendIds,
+							friendIds:self.friends,
 							enemyState:enemyState,
-							enemyIds:self.enemyIds,
+							enemyIds:self.enemys,
 							friendScore:3-self.enemyHeartNum,
 							enemyScore:3-self.friendHeartNum
 						}
@@ -1098,9 +1117,9 @@ class uiGame extends BaseView {
 					setTimeout(function() {
 						var data = {
 							friendState:friendState,
-							friendIds:self.friendIds,
+							friendIds:self.friends,
 							enemyState:enemyState,
-							enemyIds:self.enemyIds,
+							enemyIds:self.enemys,
 							friendScore:3-self.enemyHeartNum,
 							enemyScore:3-self.friendHeartNum
 						}
@@ -1146,7 +1165,7 @@ class uiGame extends BaseView {
 		if(userid != GameData.gameUser.id)
 		{
 			if(!this.gameover){
-				let friends = this.friendIds.filter(function(x){
+				let friends = this.friends.filter(function(x){
 					return x == userid;
 				});
 				let tip:uiTip;
@@ -1182,7 +1201,7 @@ class uiGame extends BaseView {
 				}
 			}
 
-			let friends = this.friendIds.filter(function(x){
+			let friends = this.friends.filter(function(x){
 				return x == userid;
 			});
 
@@ -1200,9 +1219,9 @@ class uiGame extends BaseView {
 					setTimeout(function() {
 						var data = {
 							friendState:friendState,
-							friendIds:self.friendIds,
+							friendIds:self.friends,
 							enemyState:enemyState,
-							enemyIds:self.enemyIds,
+							enemyIds:self.enemys,
 							friendScore:3-self.enemyHeartNum,
 							enemyScore:3-self.friendHeartNum
 						}
@@ -1222,9 +1241,9 @@ class uiGame extends BaseView {
 					setTimeout(function() {
 						var data = {
 							friendState:friendState,
-							friendIds:self.friendIds,
+							friendIds:self.friends,
 							enemyState:enemyState,
-							enemyIds:self.enemyIds,
+							enemyIds:self.enemys,
 							friendScore:3-self.enemyHeartNum,
 							enemyScore:3-self.friendHeartNum
 						}
