@@ -50,6 +50,8 @@ class Main extends eui.UILayer {
         let assetAdapter = new AssetAdapter();
         egret.registerImplementation("eui.IAssetAdapter", assetAdapter);
         egret.registerImplementation("eui.IThemeAdapter", new ThemeAdapter());
+        // 跨域请求
+        egret.ImageLoader.crossOrigin = "anonymous";
 
 
         this.runGame().catch(e => {
@@ -61,10 +63,9 @@ class Main extends eui.UILayer {
         await this.loadResource()
         this.createGameScene();
         const result = await RES.getResAsync("description_json")
-        await platform.login();
         const userInfo = await platform.getUserInfo();
-        console.log(userInfo);
-
+        GameData.gameUser.avatar = userInfo.avatar
+        GameData.gameUser.name = userInfo.nickname
     }
 
     private async loadResource() {

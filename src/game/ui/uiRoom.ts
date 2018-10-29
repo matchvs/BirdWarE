@@ -140,7 +140,7 @@ class uiRoom extends BaseView {
 	{
 		this.roomid = rsp.roomID;
 		this.ownerid = rsp.owner;
-		this.players[0].setData(this.ownerid,this.ownerid);
+		this.players[0].setData(this.ownerid,this.ownerid,{"id":GameData.gameUser.id,"nickName":GameData.gameUser.name,"avatar":GameData.gameUser.avatar});
 		GameData.isRoomOwner = true;
 		this.refreshStartBtn();
 	}
@@ -156,12 +156,14 @@ class uiRoom extends BaseView {
 
 		roomUserInfoList.push({
 			userId: GameData.gameUser.id,
-						userProfile: ""
+						userProfile: JSON.stringify({"id":GameData.gameUser.id,"nickName":GameData.gameUser.name,"avatar":GameData.gameUser.avatar})
 		})
 		
         this.ownerid = roomInfo.ownerId;
         for (var j = 0; j < roomUserInfoList.length; j++) {
-            this.players[j].setData(roomUserInfoList[j].userId, this.ownerid);
+			let userProfileStr = roomUserInfoList[j].userProfile;
+			let userProfile = JSON.parse(userProfileStr);
+            this.players[j].setData(roomUserInfoList[j].userId, this.ownerid,userProfile);
         }
         this.refreshStartBtn();
 	}
@@ -182,17 +184,17 @@ class uiRoom extends BaseView {
 		for (var j = 0; j < this.players.length; j++) {
             if (this.players[j].userid != 0) {
                 playerCnt++;
-                userIds.push(this.players[j].userid);
+                userIds.push(this.players[j].userProfile);
             }
         }
 
-		if (playerCnt === GameData.maxPlayerNum) {
+		if (playerCnt == GameData.maxPlayerNum) {
             var result = mvs.MsEngine.getInstance.joinOver("");
             if (result !== 0) {
                 console.log("关闭房间失败，错误码：", result);
             }
 
-            GameData.playerUserIds = userIds;
+            GameData.playerUserProfiles = userIds;
 
 			let value = JSON.stringify({
 				action:"gamestart",
@@ -228,7 +230,7 @@ class uiRoom extends BaseView {
         }
         for (var i = 0; i < this.players.length; i++) {
             if (this.players[i].userid !== 0) {
-                this.players[i].setData(this.players[i].userid, this.ownerid);
+                this.players[i].setData(this.players[i].userid, this.ownerid,this.players[i].userProfile);
             }
         }
         this.refreshStartBtn();
@@ -249,19 +251,15 @@ class uiRoom extends BaseView {
 			ContextManager.Instance.uiBack();
         }
 
-		if (GameData.gameUser.id === rsp.userId) {
-            GameData.isRoomOwner = false;
-			ContextManager.Instance.uiBack();
-        }
-
+		this.ownerid = owner;
 		if(owner == GameData.gameUser.id)
 		{
 			GameData.isRoomOwner = true;
 		}
 
 		for (var i = 0; i < this.players.length; i++) {
-			if (this.players[i].userid !== 0) {
-				this.players[i].setData(this.players[i].userid, this.ownerid);
+			if (this.players[i].userid != 0) {
+				this.players[i].setData(this.players[i].userid, this.ownerid,this.players[i].userProfile);
 			}
 		}
       	this.refreshStartBtn();
@@ -273,12 +271,12 @@ class uiRoom extends BaseView {
 		let userID = rsp.userID;
 		let owner = rsp.owner;
 		for (var j = 0; j < this.players.length; j++) {
-            if (this.players[j].userid === rsp.userId) {
+            if (this.players[j].userid == rsp.userId) {
                 this.players[j].init();
                 break;
             }
         }
-        if (GameData.gameUser.id === rsp.userId) {
+        if (GameData.gameUser.id == rsp.userId) {
             GameData.isRoomOwner = false;
 			ContextManager.Instance.uiBack();
         }
@@ -289,8 +287,8 @@ class uiRoom extends BaseView {
 		}
 
 		for (var i = 0; i < this.players.length; i++) {
-			if (this.players[i].userid !== 0) {
-				this.players[i].setData(this.players[i].userid, this.ownerid);
+			if (this.players[i].userid != 0) {
+				this.players[i].setData(this.players[i].userid, this.ownerid,this.players[i].userProfile);
 			}
 		}
       	  this.refreshStartBtn();
@@ -310,9 +308,11 @@ class uiRoom extends BaseView {
 		if(!this.parent)
 			return;
 		let roomUserInfo = ev.data;
+		let userProfile = roomUserInfo.userProfile;
+		let profile = JSON.parse(userProfile);
 		 for (var j = 0; j < this.players.length; j++) {
             if (this.players[j].userid === 0) {
-                this.players[j].setData(roomUserInfo.userId, this.ownerid);
+                this.players[j].setData(roomUserInfo.userId, this.ownerid,profile);
                 break;
             }
         }
@@ -339,10 +339,10 @@ class uiRoom extends BaseView {
 				var userIds = [];
 				for (var j = 0; j < this.players.length; j++) {
 					if (this.players[j].userid != 0) {
-						userIds.push(this.players[j].userid);
+						userIds.push(this.players[j].userProfile);
 					}
 				}
-				GameData.playerUserIds = userIds;
+				GameData.playerUserProfiles = userIds;
 				ContextManager.Instance.showUI(UIType.gameBoard);
 			}
 		}

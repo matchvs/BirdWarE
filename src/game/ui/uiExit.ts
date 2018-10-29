@@ -31,16 +31,6 @@ class uiExit extends BaseView{
 
 	private onLeaveGameClick()
 	{
-		let newRoomOwner = 0;
-		for(let i=0;i<GameData.playerUserIds.length;i++)
-		{
-			if(GameData.playerUserIds[i] != GameData.gameUser.id)
-			{
-				newRoomOwner = GameData.playerUserIds[i] ;
-				break;
-			}
-		}
-
 		mvs.MsEngine.getInstance.leaveRoom("");
 	}
 }

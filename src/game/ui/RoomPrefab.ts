@@ -27,7 +27,7 @@ class RoomPrefab extends eui.Component implements  eui.UIComponent {
 	}
 	private joinRoom()
 	{
-		let info = {name:GameData.gameUser.name,avatar:GameData.gameUser.avatar};
+		let info = {"id":GameData.gameUser.id,"nickName":GameData.gameUser.name,"avatar":GameData.gameUser.avatar};
 		let infostr = JSON.stringify(info);
 		mvs.MsEngine.getInstance.joinRoom(this.msRoomAttribute.roomID,infostr);
 	}

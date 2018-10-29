@@ -817,7 +817,7 @@
 		<e:Image source="clock_png" x="9.62" y="8.14"/>
 		<e:Label id="time" text="60" x="88.63" y="44.03" size="20" anchorOffsetX="61.46" anchorOffsetY="10" textColor="0x020202" verticalAlign="middle" width="29.5" textAlign="center"/>
 	</e:Group>
-	<e:Group id="playerLayout" width="153.03" height="63.64" x="64" y="56.2" anchorOffsetY="0" anchorOffsetX="0">
+	<e:Group id="playerLayout" width="153.03" height="63.64" x="65" y="56.2" anchorOffsetY="0" anchorOffsetX="0">
 		<ns1:playerIcon id="playerIcon1" x="9" y="12" scaleX="0.7" scaleY="0.7"/>
 		<ns1:playerIcon id="playerIcon2" x="19" y="22" scaleX="0.7" scaleY="0.7"/>
 		<e:layout>

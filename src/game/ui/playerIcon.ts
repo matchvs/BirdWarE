@@ -1,5 +1,6 @@
 class playerIcon extends eui.Component implements  eui.UIComponent {
 	public player:eui.Image;
+	public avatarMask:eui.Image;
 	public userInfo = null;
 
 	public constructor() {
@@ -20,6 +21,7 @@ class playerIcon extends eui.Component implements  eui.UIComponent {
 	
 	private addToStage()
 	{
+		this.player.mask = this.avatarMask;
 		this.init();
 	}
 
@@ -29,8 +31,11 @@ class playerIcon extends eui.Component implements  eui.UIComponent {
 		this.userInfo = null;
 	}
 
-	public setData(userInfo)
+	public setData(userInfo:any)
 	{
+		let avatar = userInfo.avatar;
+		this.player.source = avatar;
+
 		this.player.visible = true;
 		this.userInfo = userInfo;
 	}

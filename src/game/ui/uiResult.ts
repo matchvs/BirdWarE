@@ -83,7 +83,7 @@ class uiResult extends BaseView {
 		for(let i=0;i<friendIds.length;i++)
 		{
 			this.playerLayout.getChildAt(i).visible = true;
-			(<playerIcon>this.playerLayout.getChildAt(i)).setData("");
+			(<playerIcon>this.playerLayout.getChildAt(i)).setData(friendIds[i]);
 		}
 		for(let i=0;i<this.playerNameLayout.numChildren;i++)
 		{
@@ -92,7 +92,7 @@ class uiResult extends BaseView {
 		for(let i=0;i<friendIds.length;i++)
 		{
 			this.playerNameLayout.getChildAt(i).visible = true;
-			(<eui.Label>this.playerNameLayout.getChildAt(i)).text = friendIds[i];
+			(<eui.Label>this.playerNameLayout.getChildAt(i)).text = friendIds[i].id;
 		}
 		for(let i=0;i<this.enemyLayout.numChildren;i++)
 		{
@@ -101,7 +101,7 @@ class uiResult extends BaseView {
 		for(let i=0;i<enemyIds.length;i++)
 		{
 			this.enemyLayout.getChildAt(i).visible = true;
-			(<playerIcon>this.enemyLayout.getChildAt(i)).setData("");
+			(<playerIcon>this.enemyLayout.getChildAt(i)).setData(enemyIds[i]);
 		}
 		for(let i=0;i<this.enemytNameLayout.numChildren;i++)
 		{
@@ -110,7 +110,7 @@ class uiResult extends BaseView {
 		for(let i=0;i<enemyIds.length;i++)
 		{
 			this.enemytNameLayout.getChildAt(i).visible = true;
-			(<eui.Label>this.enemytNameLayout.getChildAt(i)).text = enemyIds[i];
+			(<eui.Label>this.enemytNameLayout.getChildAt(i)).text = enemyIds[i].id;
 		}
 	}
 

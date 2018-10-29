@@ -3,6 +3,7 @@
 	<w:Config id="164c791cf87" ></w:Config>
 	<e:Group x="0" y="0" scaleX="0.5" scaleY="0.5">
 		<e:Image source="play-user2_png" x="-3.03" y="-3.03"/>
+		<e:Image id="avatarMask" source="yuan_png" y="0.67" anchorOffsetX="0" width="188" anchorOffsetY="0" height="180" x="0"/>
 		<e:Image id="player" source="def-use_png" x="5.26" y="11.32" width="170" height="170"/>
 		<e:Image source="play-user1_png" x="-1" y="-2"/>
 	</e:Group>

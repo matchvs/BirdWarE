@@ -43,7 +43,7 @@ class uiMatch extends BaseView {
 	public onEnter(context:any):void
 	{
 		GameData.maxPlayerNum = 2;
-		let info = {name:GameData.gameUser.name,avatar:GameData.gameUser.avatar};
+		let info = {"id":GameData.gameUser.id,"nickName":GameData.gameUser.name,"avatar":GameData.gameUser.avatar};
 		let infostr = JSON.stringify(info);
 		mvs.MsEngine.getInstance.joinRandomRoom(GameData.maxPlayerNum,infostr);
 		//this.playerIcons.push(this.player1);
@@ -112,13 +112,13 @@ class uiMatch extends BaseView {
         }
 		GameData.roomID = roomInfo.roomID;
 		this.gameUserList = [];
-		this.gameUserList.push(GameData.gameUser.id);
+		this.gameUserList.push({"id":GameData.gameUser.id,"nickName":GameData.gameUser.name,"avatar":GameData.gameUser.avatar});
 
 		for(let i=0;i<roomuserInfoList.length;i++)
 		{
-			if(GameData.gameUser.id != roomuserInfoList[i].userId)
+			if(GameData.gameUser.id != roomuserInfoList[i].userID)
 			{
-				this.gameUserList.push(roomuserInfoList[i].userId);
+				this.gameUserList.push(JSON.parse(roomuserInfoList[i].userProfile));
 			}
 		}
 
@@ -133,10 +133,10 @@ class uiMatch extends BaseView {
 		}
 
 		this.gameUserList.sort(function(a,b){
-			return a - b;
+			return a.id - b.id;
 		})
 
-		GameData.playerUserIds = this.gameUserList;
+		GameData.playerUserProfiles = this.gameUserList;
 		if(this.gameUserList.length >= 2)
 		{
 			mvs.MsEngine.getInstance.joinOver("");
@@ -147,7 +147,9 @@ class uiMatch extends BaseView {
 		if(!this.parent)
 			return;
 		let data = ev.data;
-		this.gameUserList.push(data.userId);
+		let userProfileStr = data.userProfile;
+		let userProfile = JSON.parse(userProfileStr);
+		this.gameUserList.push(userProfile);
 		for(let i=0;i<this.playerIcons.length;i++)
 		{
 			this.playerIcons[i].init();
@@ -157,9 +159,9 @@ class uiMatch extends BaseView {
 			this.playerIcons[i].setData(this.gameUserList[i]);
 		}
 		this.gameUserList.sort(function(a,b){
-			return a-b;
+			return a.id-b.id;
 		});
-		GameData.playerUserIds = this.gameUserList;
+		GameData.playerUserProfiles = this.gameUserList;
 	}
 
 	private joinOverNotify(ev:egret.Event) {
