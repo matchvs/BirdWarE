@@ -521,7 +521,7 @@ function addOpenDataContextListener() {
         hasCreateScene = createScene();
         getFriendScore();
       }
-      // requestAnimationFrameID = requestAnimationFrame(loop);
+      requestAnimationFrameID = requestAnimationFrame(loop);
     } else if (data.command == 'close' && requestAnimationFrameID) {
       cancelAnimationFrame(requestAnimationFrameID);
       requestAnimationFrameID = null
@@ -533,6 +533,7 @@ function addOpenDataContextListener() {
       // console.log('加载资源')
       preloadAssets();
     } else if (data.command == "setUserCloudStorage") {
+      console.log("设置玩家数据");
       setMyScore();
     }
   });
@@ -551,7 +552,6 @@ function loop() {
     context.setTransform(1, 0, 0, 1, 0, 0);
     context.clearRect(0, 0, sharedCanvas.width, sharedCanvas.height);
     drawRankPanel();
-    drawRankGroup()
     renderDirty = false;
   }
   requestAnimationFrameID = requestAnimationFrame(loop);
@@ -596,8 +596,7 @@ function getFriendScore() {
       totalGroup.sort(function (a, b) {
         return b.scroes - a.scroes;
       });
-      requestAnimationFrameID = requestAnimationFrame(loop);
-     // drawRankGroup();
+      drawRankGroup();
     },
     fail: res => {
       console.log(res);
