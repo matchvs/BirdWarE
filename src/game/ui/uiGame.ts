@@ -1262,8 +1262,8 @@ class uiGame extends BaseView {
 		let ownerId = data.owner;
 		if(state == 1)
 		{
-			let tip = new uiTip("玩家"+userid+"网络断开连接");
-			this.addChild(tip);
+			// let tip = new uiTip("玩家"+userid+"网络断开连接");
+			// this.addChild(tip);
 			mvs.MsEngine.getInstance.kickPlayer(userid,"");
 		}else if(state == 3)
 		{
