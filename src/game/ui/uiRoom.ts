@@ -229,7 +229,7 @@ class uiRoom extends BaseView {
             GameData.isRoomOwner = true;
         }
         for (var i = 0; i < this.players.length; i++) {
-            if (this.players[i].userid !== 0) {
+            if (this.players[i].userid != 0) {
                 this.players[i].setData(this.players[i].userid, this.ownerid,this.players[i].userProfile);
             }
         }
@@ -311,7 +311,7 @@ class uiRoom extends BaseView {
 		let userProfile = roomUserInfo.userProfile;
 		let profile = JSON.parse(userProfile);
 		 for (var j = 0; j < this.players.length; j++) {
-            if (this.players[j].userid === 0) {
+            if (this.players[j].userid == 0) {
                 this.players[j].setData(roomUserInfo.userId, this.ownerid,profile);
                 break;
             }
