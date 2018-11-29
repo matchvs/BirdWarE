@@ -1078,7 +1078,7 @@ class uiGame extends BaseView {
 			}
 
 			let friends = this.friends.filter(function(x){
-				return x == userid;
+				return x.id == userid;
 			});
 
 			if(friends.length > 0)
@@ -1133,8 +1133,9 @@ class uiGame extends BaseView {
 	private kickPlayerNotify(ev:egret.Event)
 	{
 		let data = ev.data;
-		let userid = data.userID;
+		let userid = data.userId;
 		let ownerId = data.owner;
+
 		let self = this;
 		 let friend = this.friendIdsState.filter(function(x){
 			return x.id == userid;
@@ -1202,7 +1203,7 @@ class uiGame extends BaseView {
 			}
 
 			let friends = this.friends.filter(function(x){
-				return x == userid;
+				return x.id == userid;
 			});
 
 			if(friends.length > 0)
