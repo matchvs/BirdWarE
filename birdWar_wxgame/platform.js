@@ -101,7 +101,7 @@ class WxgamePlatform {
     return new Promise((resolve, reject) => {
       wx.shareAppMessage({
         title: "组队小鸡射击",
-        imageUrl: "resource/assets/texture/xiaojilogo.png"
+        imageUrl: "openDataContext/assets/xiaojilogo.png"
       })
     })
   }

@@ -164,12 +164,13 @@ function drawRankPanel() {
   context_drawImage(title, titleX, titleY, titleWith, titleHeight);
   //获取当前要渲染的数据组
   // drawRankGroup();
-
+  
   //创建按钮
   drawButton()
 }
 
-function drawRankGroup() {
+function drawRankGroup()
+{
   //起始id
   const startID = perPageMaxNum * page;
   currentGroup = totalGroup.slice(startID, startID + perPageMaxNum);
@@ -260,7 +261,8 @@ function drawByData(data, i) {
   image.src = iconURL;
   image.width = avatarSize * 4 / 5;
   image.height = avatarSize * 4 / 5;
-  image.onload = function () {
+  image.onload = function()
+  {
     context_drawImage(image, x, startY + i * preOffsetY + (barHeight - avatarSize * 4 / 5) / 2, avatarSize * 4 / 5, avatarSize * 4 / 5);
     x += avatarSize + intervalX;
     //绘制名称
@@ -576,13 +578,16 @@ function getFriendScore() {
     success: res => {
       totalGroup = [];
       let userGameData = res.data;
-      for (let i = 0; i < userGameData.length; i++) {
+      for(let i=0;i<userGameData.length;i++)
+      {
         let user = userGameData[i];
         let avatarUrl = user.avatarUrl;
         let nickname = user.nickname;
         let KVDataList = user.KVDataList;
-        for (let j = 0; j < KVDataList.length; j++) {
-          if (KVDataList[j].key == 'playRound') {
+        for(let j = 0;j<KVDataList.length;j++)
+        {
+          if (KVDataList[j].key == 'playRound')
+          {
             let group = new Object();
             group["key"] = i + 1;
             group["name"] = nickname;
@@ -591,9 +596,9 @@ function getFriendScore() {
             [j].value);
             totalGroup.push(group);
           }
-        }
+        } 
       }
-      totalGroup.sort(function (a, b) {
+      totalGroup.sort(function(a,b){
         return b.scroes - a.scroes;
       });
       drawRankGroup();
@@ -614,12 +619,14 @@ function setMyScore() {
     success: res => {
       let data = res;
       console.log(data);
-      if (res.errMsg == "getUserCloudStorage:ok") {
+      if (res.errMsg == "getUserCloudStorage:ok")
+      {
         let klist = data.KVDataList;
-        if (klist.length == 0) {
+        if(klist.length == 0)
+        {
           let playRound = 1;
           saveMyScore(playRound);
-        } else {
+        }else{
           let klist = data.KVDataList;
           for (let j = 0; j < klist.length; j++) {
             let obj = klist[j];
