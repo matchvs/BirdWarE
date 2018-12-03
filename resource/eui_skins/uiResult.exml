@@ -34,11 +34,11 @@
 		<e:Label text="123" x="-25" y="29.94" scaleX="1" scaleY="1" textColor="0x000000" textAlign="right" anchorOffsetX="0" width="128" anchorOffsetY="0" height="43" verticalAlign="middle" size="15"/>
 		<e:Label text="123" x="-17" y="147.31" scaleX="1" scaleY="1" textColor="0x000000" anchorOffsetX="0" width="120" textAlign="right" anchorOffsetY="0" height="50" verticalAlign="middle" size="15"/>
 	</e:Group>
-	<e:Group id="enemyLayout" width="200" height="372.73" x="486.42" y="497.94" anchorOffsetY="0">
+	<e:Group id="enemyLayout" width="200" height="372.73" x="486.42" y="494.61" anchorOffsetY="0">
 		<e:layout>
 			<e:VerticalLayout horizontalAlign="center" gap="20"/>
 		</e:layout>
-		<ns1:playerIcon x="62" y="44"/>
+		<ns1:playerIcon x="62" y="-4"/>
 		<ns1:playerIcon x="72" y="54"/>
 	</e:Group>
 </e:Skin>
