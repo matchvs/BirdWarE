@@ -300,8 +300,8 @@ class uiMatch extends BaseView {
 		if(state == 1)
 		{
 		
-			let tip = new uiTip("玩家"+userID+"网络断开连接");
-			this.addChild(tip);
+			// let tip = new uiTip("玩家"+userID+"网络断开连接");
+			// this.addChild(tip);
 			mvs.MsEngine.getInstance.kickPlayer(userID,"");
 		}else if(state == 3)
 		{
