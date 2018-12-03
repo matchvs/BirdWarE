@@ -5,7 +5,7 @@
 	<e:Image id="avatarMask" x="300.34" y="283.99" anchorOffsetX="0" width="148.67" anchorOffsetY="0" height="151" alpha="1" source="yuan_png"/>
 	<e:Image id="avatar" source="def-user-squ_png" x="294.6" y="283.41" anchorOffsetX="0" width="158.95" anchorOffsetY="0" height="155.91" fillMode="scale" blendMode="normal"/>
 	<e:Image source="handcon_png" x="254.84" y="210.5"/>
-	<e:Label id="username" text="玩家名称" x="280.64" y="457.44" textColor="0x000000" anchorOffsetX="0" width="192.73" anchorOffsetY="0" height="72.42" verticalAlign="middle" textAlign="center" size="40"/>
+	<e:Label id="username" text="玩家名称" x="205.64" y="459.32" textColor="0x000000" anchorOffsetX="0" width="334.73" anchorOffsetY="0" height="88.42" verticalAlign="middle" textAlign="center" size="22"/>
 	<e:Group id="random" x="115" y="900">
 		<e:Image source="dating-btn_png" x="0" y="0"/>
 		<e:Label text="随机匹配" x="141" y="20" anchorOffsetX="0" width="230" anchorOffsetY="0" height="86" verticalAlign="middle" textAlign="center" size="40" touchEnabled="false"/>

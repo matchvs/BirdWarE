@@ -24,15 +24,15 @@
 		<e:layout>
 			<e:BasicLayout/>
 		</e:layout>
-		<e:Label text="3235065" x="5.94" y="32" textColor="0x000000" anchorOffsetX="0" width="120" anchorOffsetY="0" height="40"/>
-		<e:Label text="320525" x="0" y="154.37" textColor="0x000000" anchorOffsetX="0" width="120" anchorOffsetY="0" height="40"/>
+		<e:Label text="3235065" x="0.94" y="32" textColor="0x000000" anchorOffsetX="0" width="137" anchorOffsetY="0" height="40" size="15" verticalAlign="middle"/>
+		<e:Label text="320525" x="0" y="154.37" textColor="0x000000" anchorOffsetX="0" width="144" anchorOffsetY="0" height="40" size="15" verticalAlign="middle"/>
 	</e:Group>
 	<e:Group id="enemytNameLayout" width="104" height="372.73" x="422" y="497" anchorOffsetY="0">
 		<e:layout>
 		<e:BasicLayout/>
 		</e:layout>
-		<e:Label text="123" x="-17" y="34.94" scaleX="1" scaleY="1" textColor="0x000000" textAlign="right" anchorOffsetX="0" width="120"/>
-		<e:Label text="123" x="-17" y="157.31" scaleX="1" scaleY="1" textColor="0x000000" anchorOffsetX="0" width="120" textAlign="right"/>
+		<e:Label text="123" x="-25" y="29.94" scaleX="1" scaleY="1" textColor="0x000000" textAlign="right" anchorOffsetX="0" width="128" anchorOffsetY="0" height="43" verticalAlign="middle" size="15"/>
+		<e:Label text="123" x="-17" y="147.31" scaleX="1" scaleY="1" textColor="0x000000" anchorOffsetX="0" width="120" textAlign="right" anchorOffsetY="0" height="50" verticalAlign="middle" size="15"/>
 	</e:Group>
 	<e:Group id="enemyLayout" width="200" height="372.73" x="486.42" y="497.94" anchorOffsetY="0">
 		<e:layout>
