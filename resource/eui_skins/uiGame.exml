@@ -252,41 +252,6 @@
 					</tween:props>
 				</tween:To>
 			</tween:TweenItem>
-			<tween:TweenItem target="{hitByGroup}">
-				<tween:Set>
-					<tween:props>
-						<e:Object alpha="{1}"/>
-					</tween:props>
-				</tween:Set>
-			</tween:TweenItem>
-			<tween:TweenItem target="{hitgroup}">
-				<tween:Set>
-					<tween:props>
-						<e:Object alpha="{0}"/>
-					</tween:props>
-				</tween:Set>
-			</tween:TweenItem>
-			<tween:TweenItem target="{gameoverGroup}">
-				<tween:Set>
-					<tween:props>
-						<e:Object alpha="{0}"/>
-					</tween:props>
-				</tween:Set>
-			</tween:TweenItem>
-			<tween:TweenItem target="{readyGroup}">
-				<tween:Set>
-					<tween:props>
-						<e:Object alpha="{0}"/>
-					</tween:props>
-				</tween:Set>
-			</tween:TweenItem>
-			<tween:TweenItem target="{timeoverGroup}">
-				<tween:Set>
-					<tween:props>
-						<e:Object alpha="{0}"/>
-					</tween:props>
-				</tween:Set>
-			</tween:TweenItem>
 		</tween:TweenGroup>
 		<tween:TweenGroup id="hit">
 			<tween:TweenItem target="{image10}">
@@ -435,41 +400,6 @@
 					</tween:props>
 				</tween:To>
 			</tween:TweenItem>
-			<tween:TweenItem target="{hitgroup}">
-				<tween:Set>
-					<tween:props>
-						<e:Object alpha="{1}"/>
-					</tween:props>
-				</tween:Set>
-			</tween:TweenItem>
-			<tween:TweenItem target="{hitByGroup}">
-				<tween:Set>
-					<tween:props>
-						<e:Object alpha="{0}"/>
-					</tween:props>
-				</tween:Set>
-			</tween:TweenItem>
-			<tween:TweenItem target="{gameoverGroup}">
-				<tween:Set>
-					<tween:props>
-						<e:Object alpha="{0}"/>
-					</tween:props>
-				</tween:Set>
-			</tween:TweenItem>
-			<tween:TweenItem target="{readyGroup}">
-				<tween:Set>
-					<tween:props>
-						<e:Object alpha="{0}"/>
-					</tween:props>
-				</tween:Set>
-			</tween:TweenItem>
-			<tween:TweenItem target="{timeoverGroup}">
-				<tween:Set>
-					<tween:props>
-						<e:Object alpha="{0}"/>
-					</tween:props>
-				</tween:Set>
-			</tween:TweenItem>
 		</tween:TweenGroup>
 		<tween:TweenGroup id="gameoverAni">
 			<tween:TweenItem target="{image18}">
@@ -547,41 +477,6 @@
 					</tween:props>
 				</tween:To>
 			</tween:TweenItem>
-			<tween:TweenItem target="{hitByGroup}">
-				<tween:Set>
-					<tween:props>
-						<e:Object alpha="{0}"/>
-					</tween:props>
-				</tween:Set>
-			</tween:TweenItem>
-			<tween:TweenItem target="{hitgroup}">
-				<tween:Set>
-					<tween:props>
-						<e:Object alpha="{0}"/>
-					</tween:props>
-				</tween:Set>
-			</tween:TweenItem>
-			<tween:TweenItem target="{gameoverGroup}">
-				<tween:Set>
-					<tween:props>
-						<e:Object alpha="{1}"/>
-					</tween:props>
-				</tween:Set>
-			</tween:TweenItem>
-			<tween:TweenItem target="{readyGroup}">
-				<tween:Set>
-					<tween:props>
-						<e:Object alpha="{0}"/>
-					</tween:props>
-				</tween:Set>
-			</tween:TweenItem>
-			<tween:TweenItem target="{timeoverGroup}">
-				<tween:Set>
-					<tween:props>
-						<e:Object alpha="{0}"/>
-					</tween:props>
-				</tween:Set>
-			</tween:TweenItem>
 		</tween:TweenGroup>
 		<tween:TweenGroup id="ready">
 			<tween:TweenItem target="{image20}">
@@ -648,34 +543,6 @@
 						<e:Object alpha="{0}" scaleX="{3.5}" scaleY="{3.5}" x="{-397}" y="{-83}"/>
 					</tween:props>
 				</tween:To>
-			</tween:TweenItem>
-			<tween:TweenItem target="{readyGroup}">
-				<tween:Set>
-					<tween:props>
-						<e:Object alpha="{1}"/>
-					</tween:props>
-				</tween:Set>
-			</tween:TweenItem>
-			<tween:TweenItem target="{hitByGroup}">
-				<tween:Set>
-					<tween:props>
-						<e:Object alpha="{0}"/>
-					</tween:props>
-				</tween:Set>
-			</tween:TweenItem>
-			<tween:TweenItem target="{gameoverGroup}">
-				<tween:Set>
-					<tween:props>
-						<e:Object alpha="{0}"/>
-					</tween:props>
-				</tween:Set>
-			</tween:TweenItem>
-			<tween:TweenItem target="{timeoverGroup}">
-				<tween:Set>
-					<tween:props>
-						<e:Object alpha="{0}"/>
-					</tween:props>
-				</tween:Set>
 			</tween:TweenItem>
 		</tween:TweenGroup>
 		<tween:TweenGroup id="timeoverTween">
@@ -756,41 +623,6 @@
 						<e:Object alpha="{0}"/>
 					</tween:props>
 				</tween:To>
-			</tween:TweenItem>
-			<tween:TweenItem target="{timeoverGroup}">
-				<tween:Set>
-					<tween:props>
-						<e:Object alpha="{1}"/>
-					</tween:props>
-				</tween:Set>
-			</tween:TweenItem>
-			<tween:TweenItem target="{readyGroup}">
-				<tween:Set>
-					<tween:props>
-						<e:Object alpha="{0}"/>
-					</tween:props>
-				</tween:Set>
-			</tween:TweenItem>
-			<tween:TweenItem target="{gameoverGroup}">
-				<tween:Set>
-					<tween:props>
-						<e:Object alpha="{0}"/>
-					</tween:props>
-				</tween:Set>
-			</tween:TweenItem>
-			<tween:TweenItem target="{hitgroup}">
-				<tween:Set>
-					<tween:props>
-						<e:Object alpha="{0}"/>
-					</tween:props>
-				</tween:Set>
-			</tween:TweenItem>
-			<tween:TweenItem target="{hitByGroup}">
-				<tween:Set>
-					<tween:props>
-						<e:Object alpha="{0}"/>
-					</tween:props>
-				</tween:Set>
 			</tween:TweenItem>
 		</tween:TweenGroup>
 	</w:Declarations>

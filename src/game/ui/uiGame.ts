@@ -398,7 +398,8 @@ class uiGame extends BaseView {
 					this.gameover = true;
 					this.gamestart = false;
 					var loseCamp:Camp = Camp.friend;
-					this.gameoverAni.play(0);
+					//this.gameoverAni.play(0);
+					this.playAnimation("gameover");
 					var sound:egret.Sound = RES.getRes("gameover_mp3");
 					sound.play(0,1);
 					setTimeout(function() {
@@ -420,7 +421,8 @@ class uiGame extends BaseView {
 					this.gameover = true;
 					this.gamestart = false;
 					var loseCamp:Camp = Camp.enemy;
-					this.gameoverAni.play(0);
+					// this.gameoverAni.play(0);
+					this.playAnimation("gameover");
 					var sound:egret.Sound = RES.getRes("gameover_mp3");
 					sound.play(0,1);
 					setTimeout(function() {
@@ -515,7 +517,8 @@ class uiGame extends BaseView {
 						player.playerDead(-1);
 					}
 				}
-				this.timeoverTween.play(0);
+				// this.timeoverTween.play(0);
+				this.playAnimation("timeover");
 				this.roundOver(Camp.none);
 			}else if(sdNotify.cpProto.indexOf("roundStart") >= 0)
 			{
@@ -540,15 +543,16 @@ class uiGame extends BaseView {
 				{
 					if(die)
 					{
-						this.hit.play(0);
+						// this.hit.play(0);
+						this.playAnimation("hit");
 						var sound:egret.Sound = RES.getRes("hit_mp3");
-						sound.play(0,1);
 					}
 				}else if(playerID == GameData.gameUser.id && murderId)
 				{
 					if(die)
 					{
-						this.hitby.play(0);
+						//this.hitby.play(0);
+						this.playAnimation("hitby");
 						var sound:egret.Sound = RES.getRes("behit_mp3");
 						sound.play(0,1);
 					}
@@ -607,10 +611,12 @@ class uiGame extends BaseView {
 	{
 		if(data.murderId == GameData.gameUser.id)
 		{
-			this.hit.play(0);
+			// this.hit.play(0);
+			this.playAnimation("hit");
 		}else if(data.Id == GameData.gameUser.id && data.murderId)
 		{
-			this.hitby.play(0);
+			// this.hitby.play(0);
+			this.playAnimation("hitby");
 		}
 
 		for(var i=0;i<this.players.length;i++)
@@ -624,7 +630,8 @@ class uiGame extends BaseView {
 
 	public gameOver()
 	{
-		this.gameoverAni.play(0);
+		// this.gameoverAni.play(0);
+		this.playAnimation("gameover");
 		var sound:egret.Sound = RES.getRes("gameover_mp3");
   		sound.play(0,1);
 		clearInterval(this.countDownInterval);
@@ -649,9 +656,8 @@ class uiGame extends BaseView {
 		this.time.text = 30 + "";		
 		var curRound = this.curRound;
 		this.roundCntLb.text = curRound.toString();
-		this.roundLb.play(0);
-		this.rope.play(0);
-		this.ready.play(0);
+		
+		this.playAnimation("ready");
 		var sound:egret.Sound = RES.getRes("readygo_mp3");
   		sound.play(0,1);
 		if(this.items && this.items.parent) 
@@ -667,12 +673,6 @@ class uiGame extends BaseView {
 			self.countDown();			
 		}, 3000);	
 		this.initPlayers();
-
-		this.hitByGroup.alpha = 0;
-		this.hitgroup.alpha = 0;
-		this.gameoverGroup.alpha = 0;
-		this.readyGroup.alpha = 0;
-		this.timeoverGroup.alpha = 0;
 	}
 
 	public roundOver(loseCamp:Camp)
@@ -729,7 +729,9 @@ class uiGame extends BaseView {
 				loseCamp = Camp.friend;
 			}
 			this.gameover = true;
-			this.gameoverAni.play(0);
+			// this.gameoverAni.play(0);
+			this.playAnimation("gameover");
+
 			var sound:egret.Sound = RES.getRes("gameover_mp3");
   			sound.play(0,1);
 			setTimeout(function() {
@@ -751,6 +753,7 @@ class uiGame extends BaseView {
 			}, 3000);
 		}
 		clearInterval(this.countDownInterval);
+
 	}
 
 	private onTouchEvent()
@@ -1089,7 +1092,8 @@ class uiGame extends BaseView {
 					this.gameover = true;
 					this.gamestart = false;
 					var loseCamp:Camp = Camp.friend;
-					this.gameoverAni.play(0);
+					// this.gameoverAni.play(0);
+					this.playAnimation("gameover");
 					var sound:egret.Sound = RES.getRes("gameover_mp3");
 					sound.play(0,1);
 					setTimeout(function() {
@@ -1111,7 +1115,8 @@ class uiGame extends BaseView {
 					this.gameover = true;
 					this.gamestart = false;
 					var loseCamp:Camp = Camp.enemy;
-					this.gameoverAni.play(0);
+					// this.gameoverAni.play(0);
+					this.playAnimation("gameover");
 					var sound:egret.Sound = RES.getRes("gameover_mp3");
 					sound.play(0,1);
 					setTimeout(function() {
@@ -1214,7 +1219,8 @@ class uiGame extends BaseView {
 					this.gameover = true;
 					this.gamestart = false;
 					var loseCamp:Camp = Camp.friend;
-					this.gameoverAni.play(0);
+					// this.gameoverAni.play(0);
+					this.playAnimation("gameover");
 					var sound:egret.Sound = RES.getRes("gameover_mp3");
 					sound.play(0,1);
 					setTimeout(function() {
@@ -1236,7 +1242,8 @@ class uiGame extends BaseView {
 					this.gameover = true;
 					this.gamestart = false;
 					var loseCamp:Camp = Camp.enemy;
-					this.gameoverAni.play(0);
+					// this.gameoverAni.play(0);
+					this.playAnimation("gameover");
 					var sound:egret.Sound = RES.getRes("gameover_mp3");
 					sound.play(0,1);
 					setTimeout(function() {
@@ -1269,6 +1276,33 @@ class uiGame extends BaseView {
 		}else if(state == 3)
 		{
 			
+		}
+	}
+
+	private playAnimation(aniName)
+	{
+		this.hitByGroup.visible = (aniName == "hitby");
+		this.hitgroup.visible = (aniName == "hit");
+		this.gameoverGroup.visible = (aniName == "gameover");
+		this.readyGroup.visible = (aniName == "ready");
+		this.timeoverGroup.visible = (aniName == "timeover");
+		if(aniName == "hitby")
+		{
+			this.hitby.play(0);
+		}else if(aniName == "hit")
+		{
+			this.hit.play(0);
+		}else if(aniName == "gameover")
+		{
+			this.gameoverAni.play(0);
+		}else if(aniName == "ready")
+		{
+			this.roundLb.play(0);
+			this.rope.play(0);
+			this.ready.play(0);
+		}else if(aniName == "timeover")
+		{
+			this.gameoverAni.play(0);
 		}
 	}
 }
