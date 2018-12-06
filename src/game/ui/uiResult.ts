@@ -92,7 +92,7 @@ class uiResult extends BaseView {
 		for(let i=0;i<friendIds.length;i++)
 		{
 			this.playerNameLayout.getChildAt(i).visible = true;
-			(<eui.Label>this.playerNameLayout.getChildAt(i)).text = friendIds[i].id;
+			(<eui.Label>this.playerNameLayout.getChildAt(i)).text = friendIds[i].nickName;
 		}
 		for(let i=0;i<this.enemyLayout.numChildren;i++)
 		{
@@ -110,7 +110,7 @@ class uiResult extends BaseView {
 		for(let i=0;i<enemyIds.length;i++)
 		{
 			this.enemytNameLayout.getChildAt(i).visible = true;
-			(<eui.Label>this.enemytNameLayout.getChildAt(i)).text = enemyIds[i].id;
+			(<eui.Label>this.enemytNameLayout.getChildAt(i)).text = enemyIds[i].nickName;
 		}
 	}
 
