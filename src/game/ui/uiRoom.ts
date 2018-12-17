@@ -240,6 +240,9 @@ class uiRoom extends BaseView {
 	{
 		let rsp = ev.data;
 		let owner = rsp.owner;
+		if(rsp.status != 200)
+			return;
+			
 		for (var j = 0; j < this.players.length; j++) {
             if (this.players[j].userid === rsp.userID) {
                 this.players[j].init();

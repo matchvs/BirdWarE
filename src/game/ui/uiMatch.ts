@@ -140,6 +140,7 @@ class uiMatch extends BaseView {
 		if(this.gameUserList.length >= 2)
 		{
 			mvs.MsEngine.getInstance.joinOver("");
+			ContextManager.Instance.showUI(UIType.gameBoard);
 		}
 	}
 
@@ -162,16 +163,21 @@ class uiMatch extends BaseView {
 			return a.id-b.id;
 		});
 		GameData.playerUserProfiles = this.gameUserList;
+		if(this.gameUserList.length >= 2)
+		{
+			mvs.MsEngine.getInstance.joinOver("");
+			ContextManager.Instance.showUI(UIType.gameBoard);
+		}
 	}
 
 	private joinOverNotify(ev:egret.Event) {
 		//进入游戏界面
-		ContextManager.Instance.showUI(UIType.gameBoard);
+		//ContextManager.Instance.showUI(UIType.gameBoard);
 	}
 
 	private joinOverResponse(ev:egret.Event) {
 		//进入游戏界面
-		ContextManager.Instance.showUI(UIType.gameBoard);
+		// ContextManager.Instance.showUI(UIType.gameBoard);
 	}
 	
 	private leaveRoomResponse(ev:egret.Event) {
