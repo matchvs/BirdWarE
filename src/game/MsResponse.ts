@@ -124,7 +124,7 @@ module mvs {
 		private joinRoomNotify(roomUserInfo:MsRoomUserInfo){
 			console.info("[joinRoomNotify] "+JSON.stringify(roomUserInfo));
 			let data = {
-				userId : roomUserInfo.userID, 
+				userId : roomUserInfo.userId, 
 				userProfile : roomUserInfo.userProfile};
 			this.dispatchEvent(new egret.Event(MsEvent.EVENT_JOINROOM_NTFY, false, false, data));
 		}

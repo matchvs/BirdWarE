@@ -1001,7 +1001,8 @@ class uiGame extends BaseView {
 			this.addChild(tip);
 			setTimeout(function() {
 				mvs.MsEngine.getInstance.logOut();
-				ContextManager.Instance.backSpecifiedUI(UIType.loginBoard);
+				ContextManager.Instance.uiBackMain();
+				//ContextManager.Instance.backSpecifiedUI(UIType.loginBoard);
 			}, 5000);
 		}
 	}
