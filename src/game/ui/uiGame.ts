@@ -509,6 +509,7 @@ class uiGame extends BaseView {
 			}else if(sdNotify.cpProto.indexOf("timeOver") >= 0)
 			{
 				this.gamestart = false;
+				this.gameover = true;
 				for(let i=0;i<this.players.length;i++)
 				{
 					var player = this.players[i];
@@ -566,6 +567,8 @@ class uiGame extends BaseView {
 	{
 		ContextManager.Instance.backSpecifiedUI(UIType.lobbyBoard);
 		GameData.isRoomOwner = false;
+		this.gamestart = false;
+		this.gameover = true;
 	}
 
 	private onExitClick()
@@ -577,7 +580,7 @@ class uiGame extends BaseView {
 	private roundSeconds = 30;
 	private countDown()
 	{
-		if(!this.gamestart)
+		if(!this.gamestart||this.gameOver)
 			return;
 		let self = this;
 		if(this.countDownInterval != null) clearInterval(this.countDownInterval);
@@ -717,6 +720,7 @@ class uiGame extends BaseView {
 		if(this.enemyHeartNum <= 0|| this.friendHeartNum <= 0)
 		{
 			this.gamestart = false;
+			this.gameover = true;
 			var loseCamp:Camp = Camp.none;
 			if(this.enemyHeartNum <= 0 && this.friendHeartNum <= 0)
 			{
@@ -864,7 +868,7 @@ class uiGame extends BaseView {
 
 	private onEnterFrame(e:egret.Event)
 	{
-		if(!this.gamestart)
+		if(!this.gamestart || this.gameover)
 			return;
 		//检测子弹
 		for(let i=0;i<this.friendBullets.length;i++)
@@ -995,6 +999,7 @@ class uiGame extends BaseView {
 	{
 		let data = ev.data;
 		let errorCode = data.errCode;
+		let self = this;
 		if(errorCode == 1001)
 		{
 			let tip = new uiTip("网络断开连接");
@@ -1002,6 +1007,8 @@ class uiGame extends BaseView {
 			setTimeout(function() {
 				mvs.MsEngine.getInstance.logOut();
 				ContextManager.Instance.uiBackMain();
+				self.gameover = true;
+				self.gamestart = false;
 				//ContextManager.Instance.backSpecifiedUI(UIType.loginBoard);
 			}, 5000);
 		}

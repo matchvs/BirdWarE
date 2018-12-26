@@ -139,8 +139,11 @@ class uiMatch extends BaseView {
 		GameData.playerUserProfiles = this.gameUserList;
 		if(this.gameUserList.length >= 2)
 		{
-			mvs.MsEngine.getInstance.joinOver("");
-			ContextManager.Instance.showUI(UIType.gameBoard);
+			setTimeout(function() {
+				mvs.MsEngine.getInstance.joinOver("");
+				ContextManager.Instance.showUI(UIType.gameBoard);
+			}, 200);
+		
 		}
 	}
 
@@ -165,8 +168,10 @@ class uiMatch extends BaseView {
 		GameData.playerUserProfiles = this.gameUserList;
 		if(this.gameUserList.length >= 2)
 		{
-			mvs.MsEngine.getInstance.joinOver("");
-			ContextManager.Instance.showUI(UIType.gameBoard);
+			setTimeout(function() {
+				mvs.MsEngine.getInstance.joinOver("");
+				ContextManager.Instance.showUI(UIType.gameBoard);
+			}, 200);
 		}
 	}
 
