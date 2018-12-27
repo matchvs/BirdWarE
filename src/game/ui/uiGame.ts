@@ -93,7 +93,7 @@ class uiGame extends BaseView {
 
 		this.addEventListener(egret.TouchEvent.TOUCH_TAP,this.onTouchEvent,this);	
 
-		this.gamestart = false;
+		this.gamestart = true;
 		this.gameover = false;
 		let self = this;
 		this.roundStart();
@@ -509,7 +509,6 @@ class uiGame extends BaseView {
 			}else if(sdNotify.cpProto.indexOf("timeOver") >= 0)
 			{
 				this.gamestart = false;
-				this.gameover = true;
 				for(let i=0;i<this.players.length;i++)
 				{
 					var player = this.players[i];
@@ -567,8 +566,6 @@ class uiGame extends BaseView {
 	{
 		ContextManager.Instance.backSpecifiedUI(UIType.lobbyBoard);
 		GameData.isRoomOwner = false;
-		this.gamestart = false;
-		this.gameover = true;
 	}
 
 	private onExitClick()
@@ -580,7 +577,7 @@ class uiGame extends BaseView {
 	private roundSeconds = 30;
 	private countDown()
 	{
-		if(!this.gamestart||this.gameOver)
+		if(!this.gamestart)
 			return;
 		let self = this;
 		if(this.countDownInterval != null) clearInterval(this.countDownInterval);
@@ -720,7 +717,6 @@ class uiGame extends BaseView {
 		if(this.enemyHeartNum <= 0|| this.friendHeartNum <= 0)
 		{
 			this.gamestart = false;
-			this.gameover = true;
 			var loseCamp:Camp = Camp.none;
 			if(this.enemyHeartNum <= 0 && this.friendHeartNum <= 0)
 			{
@@ -868,7 +864,7 @@ class uiGame extends BaseView {
 
 	private onEnterFrame(e:egret.Event)
 	{
-		if(!this.gamestart || this.gameover)
+		if(!this.gamestart)
 			return;
 		//检测子弹
 		for(let i=0;i<this.friendBullets.length;i++)
