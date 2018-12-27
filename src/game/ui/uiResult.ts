@@ -41,14 +41,18 @@ class uiResult extends BaseView {
 		this.playerScore.text = friendScore + "";
 		this.enemyScore.text = enemyScore + "";
 
-		// let platform: any = window.platform;
-		// //主域向子域发送自定义消息
-		// platform.openDataContext.postMessage({
-		// 	isDisplay: true,
-		// 	text: 'hello',
-		// 	year: (new Date()).getFullYear(),
-		// 	command: "setUserCloudStorage"
-		// });
+		
+		if(egret.Capabilities.runtimeType == egret.RuntimeType.WXGAME)
+		{
+			let platform: any = window.platform;
+			//主域向子域发送自定义消息
+			platform.openDataContext.postMessage({
+				isDisplay: true,
+				text: 'hello',
+				year: (new Date()).getFullYear(),
+				command: "setUserCloudStorage"
+			});
+		}
 		if(friendState == 1)
 		{
 			this.lose.visible = true;

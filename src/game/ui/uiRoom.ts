@@ -178,6 +178,7 @@ class uiRoom extends BaseView {
 		if(!GameData.isRoomOwner)
 		{
 			//不是房主等待房间开始
+			return;
 		}
 		var userIds = [];
 		var playerCnt = 0;

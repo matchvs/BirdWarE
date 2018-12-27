@@ -93,7 +93,7 @@ class uiGame extends BaseView {
 
 		this.addEventListener(egret.TouchEvent.TOUCH_TAP,this.onTouchEvent,this);	
 
-		this.gamestart = false;
+		this.gamestart = true;
 		this.gameover = false;
 		let self = this;
 		this.roundStart();
@@ -995,6 +995,7 @@ class uiGame extends BaseView {
 	{
 		let data = ev.data;
 		let errorCode = data.errCode;
+		let self = this;
 		if(errorCode == 1001)
 		{
 			let tip = new uiTip("网络断开连接");
@@ -1002,6 +1003,8 @@ class uiGame extends BaseView {
 			setTimeout(function() {
 				mvs.MsEngine.getInstance.logOut();
 				ContextManager.Instance.uiBackMain();
+				self.gameover = true;
+				self.gamestart = false;
 				//ContextManager.Instance.backSpecifiedUI(UIType.loginBoard);
 			}, 5000);
 		}
