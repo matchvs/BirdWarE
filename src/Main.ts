@@ -38,11 +38,11 @@ class Main extends eui.UILayer {
         })
 
         egret.lifecycle.onPause = () => {
-            egret.ticker.pause();
+            // egret.ticker.pause();
         }
 
         egret.lifecycle.onResume = () => {
-            egret.ticker.resume();
+            // egret.ticker.resume();
         }
 
         //inject the custom material parser
@@ -72,8 +72,9 @@ class Main extends eui.UILayer {
         try {
             const loadingView = new LoadingUI();
             this.stage.addChild(loadingView);
-            // await RES.loadConfig("default.res.json", "http://116.196.73.105:80/birdhunt/resource/");
-            await RES.loadConfig("default.res.json", "/resource/");
+            //await RES.loadConfig("default.res.json", "http://116.196.73.105:80/birdhunt/resource/");
+            await RES.loadConfig("default.res.json", "https://imgs.matchvs.com/static/tianziyou/BirdWarE/resource/");
+            // await RES.loadConfig("default.res.json", "/resource/");
             await this.loadTheme();
             await RES.loadGroup("preload", 0, loadingView);
             this.stage.removeChild(loadingView);
